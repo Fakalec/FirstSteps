@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">MergeSortApp</string>
+    <string name="app_name">SortyMorty</string>
+    <string name="add_button">Add</string>
+    <string name="sort_button">Sort</string>
+    <string name="add_string">Type string</string>
+    <string name="hello">Hello</string>
 </resources>
