@@ -3,5 +3,8 @@
     <string name="add_button">Add</string>
     <string name="sort_button">Sort</string>
     <string name="add_string">Type string</string>
-    <string name="hello">Hello</string>
+    <string name="hello">Welcome to string sorter</string>
+    <string name="textviewnew">TextViewNew</string>
+    <string name="result_text">Result text</string>
+    <string name="empty_line_toast">empty line</string>
 </resources>
