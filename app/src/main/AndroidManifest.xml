@@ -3,15 +3,18 @@
           package="out.muravev.pv">
 
     <application
+            android:name=".GlobalSortList"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ResultActivity">
-        </activity>
-        <activity android:name=".SorterActivity">
+        <activity android:name=".CyclerRecycler">
+        <!--</activity>-->
+        <!--<activity android:name=".ResultActivity">-->
+        <!--</activity>-->
+        <!--<activity android:name=".SorterActivity">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
