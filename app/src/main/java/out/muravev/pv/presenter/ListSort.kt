@@ -1,4 +1,4 @@
-package out.muravev.pv
+package out.muravev.pv.presenter
 
 class ListSort {
 

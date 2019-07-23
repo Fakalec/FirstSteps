@@ -1,4 +1,4 @@
-package out.muravev.pv
+package out.muravev.pv.presenter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.recycler_view.view.*
+import out.muravev.pv.R
 
 class RecyclerAdapter(private var context: Context, private var dataList: ArrayList<String>) :
     RecyclerView.Adapter<ViewHolder>() {
@@ -16,7 +17,13 @@ class RecyclerAdapter(private var context: Context, private var dataList: ArrayL
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.recycler_view, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(context).inflate(
+                R.layout.recycler_view,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -1,10 +1,9 @@
-package out.muravev.pv
+package out.muravev.pv.model
 
 import android.app.Application
-import out.muravev.pv.model.SorterModelImpl
 
 class GlobalModel : Application() {
-    var model = SorterModelImpl()
+    var listModel = SorterModelImpl()
 }
 
 //import android.app.Application

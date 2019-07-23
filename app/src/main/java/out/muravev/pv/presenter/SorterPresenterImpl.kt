@@ -1,6 +1,5 @@
 package out.muravev.pv.presenter
 
-import out.muravev.pv.ListSort
 import out.muravev.pv.contract.SorterContract
 import out.muravev.pv.model.SorterModelImpl
 

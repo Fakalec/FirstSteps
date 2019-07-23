@@ -6,19 +6,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import out.muravev.pv.*
+import out.muravev.pv.R
 import out.muravev.pv.contract.SorterContract
+import out.muravev.pv.model.GlobalModel
+import out.muravev.pv.presenter.RecyclerAdapter
 import out.muravev.pv.presenter.SorterPresenterImpl
 
 class SorterViewImpl : AppCompatActivity(), SorterContract.SorterView {
 
-    private lateinit var presenter: SorterPresenterImpl
+    private lateinit var sortPresenter: SorterPresenterImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        presenter = SorterPresenterImpl((application as GlobalModel).model)
+        sortPresenter = SorterPresenterImpl((application as GlobalModel).listModel)
         addAndShowEditText()
         showSortedList()
     }
@@ -28,9 +30,9 @@ class SorterViewImpl : AppCompatActivity(), SorterContract.SorterView {
             if (edit_text.text.toString() == "") {
                 showEmptyLineToast()
             } else {
-                presenter.pullString(edit_text.text.toString())
+                sortPresenter.pullString(edit_text.text.toString())
                 recycler.layoutManager = LinearLayoutManager(this)
-                recycler.adapter = RecyclerAdapter(this, presenter.getList())
+                recycler.adapter = RecyclerAdapter(this, sortPresenter.getList())
                 edit_text.setText("")
             }
         }
@@ -40,11 +42,11 @@ class SorterViewImpl : AppCompatActivity(), SorterContract.SorterView {
         val nullArray: ArrayList<String> = arrayListOf()
 
         sort_button.setOnClickListener {
-            if (presenter.getList() == nullArray) {
+            if (sortPresenter.getList() == nullArray) {
                 showEmptyLineToast()
             } else {
                 val resultIntent = Intent(this, ResultActivity::class.java)
-                presenter.sortList(presenter.getList())
+                sortPresenter.sortList(sortPresenter.getList())
                 startActivity(resultIntent)
                 recycler.adapter = RecyclerAdapter(this, nullArray)
                 edit_text.setText("")
