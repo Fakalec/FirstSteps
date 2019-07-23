@@ -7,36 +7,48 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import out.muravev.pv.*
+import out.muravev.pv.contract.SorterContract
 import out.muravev.pv.presenter.SorterPresenterImpl
 
 class SorterViewImpl : AppCompatActivity(), SorterContract.SorterView {
 
-    private var presenter: SorterPresenterImpl? = null
+    private lateinit var presenter: SorterPresenterImpl
 
-    override fun showSortedList() {
-        val nullArray: ArrayList<String> = arrayListOf()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        sort_button.setOnClickListener {
-            if (presenter?.filledList == null) {
+        presenter = SorterPresenterImpl((application as GlobalModel).model)
+        addAndShowEditText()
+        showSortedList()
+    }
+
+    override fun addAndShowEditText() {
+        add_button.setOnClickListener {
+            if (edit_text.text.toString() == "") {
                 showEmptyLineToast()
             } else {
-                val resultIntent = Intent(this, ResultActivity::class.java)
-                val emptyAdapter = RecyclerAdapter(this, nullArray)
-                presenter?.sortList(presenter!!.filledList)
-                startActivity(resultIntent)
-//                list_view.adapter = emptyAdapter
-                cycler_recycler.adapter = emptyAdapter
+                presenter.pullString(edit_text.text.toString())
+                recycler.layoutManager = LinearLayoutManager(this)
+                recycler.adapter = RecyclerAdapter(this, presenter.getList())
                 edit_text.setText("")
             }
         }
     }
 
-    override fun showAddedEditText() {
-        add_button.setOnClickListener {
-            presenter?.fillList(edit_text.text.toString())
-            cycler_recycler.layoutManager = LinearLayoutManager(this)
-            cycler_recycler.adapter = RecyclerAdapter(this, presenter!!.filledList)
-            edit_text.setText("")
+    override fun showSortedList() {
+        val nullArray: ArrayList<String> = arrayListOf()
+
+        sort_button.setOnClickListener {
+            if (presenter.getList() == nullArray) {
+                showEmptyLineToast()
+            } else {
+                val resultIntent = Intent(this, ResultActivity::class.java)
+                presenter.sortList(presenter.getList())
+                startActivity(resultIntent)
+                recycler.adapter = RecyclerAdapter(this, nullArray)
+                edit_text.setText("")
+            }
         }
     }
 
@@ -44,15 +56,4 @@ class SorterViewImpl : AppCompatActivity(), SorterContract.SorterView {
         val emptyLineNotification = Toast.makeText(this, getString(R.string.empty_line_toast), Toast.LENGTH_SHORT)
         emptyLineNotification.show()
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        presenter = SorterPresenterImpl(this)
-        showAddedEditText()
-        showSortedList()
-    }
-
-
 }

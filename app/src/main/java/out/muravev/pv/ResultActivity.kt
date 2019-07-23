@@ -7,19 +7,17 @@ import out.muravev.pv.presenter.SorterPresenterImpl
 
 class ResultActivity : AppCompatActivity() {
 
-//    lateinit var sortValUse: GlobalSortList
-//private var presenter: SorterPresenterImpl? = null
-private lateinit var presenter: SorterPresenterImpl
+    private lateinit var presenter: SorterPresenterImpl
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.result_activity)
 
-        presenter = application as SorterPresenterImpl
-//        sortValUse = application as GlobalSortList
-        result_text_view.text = "${presenter.filledList}"
-//        sortValUse.listToFill.clear()
+        presenter = SorterPresenterImpl((application as GlobalModel).model)
+        result_text_view.text = "${presenter.getList()}"
         button.setOnClickListener {
+            presenter.cleanList()
             finish()
         }
     }
