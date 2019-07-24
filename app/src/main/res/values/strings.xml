@@ -5,5 +5,6 @@
     <string name="add_string">Type string</string>
     <string name="hello">Welcome to string sorter</string>
     <string name="result_text">Result text</string>
-    <string name="empty_line_toast">empty line</string>
+    <string name="empty_edit_toast">empty edit line</string>
+    <string name="empty_list_toast">empty list items</string>
 </resources>
