@@ -2,10 +2,12 @@ package out.muravev.pv.models
 
 import out.muravev.pv.contracts.SorterContract
 
-class SorterModelImpl(private val listSort: SorterContract.SortAlgorythm) : SorterContract.SorterModel { // как запихать лист в параметр чтобы потом не было проблем с ини
+class SorterModelImpl(private val listSort: SorterContract.SortAlgorithm) : SorterContract.SorterModel {
 
     private var savedText: ArrayList<String> = arrayListOf()
     private var typedText: String = ""
+
+    override fun setEmptyTextToEdit() = ""
 
     override fun getTypedText(text: String) {
         typedText = text
@@ -19,5 +21,5 @@ class SorterModelImpl(private val listSort: SorterContract.SortAlgorythm) : Sort
 
     override fun setStringList() = savedText
 
-    override fun setSortedStringList() = listSort.getMergingBranchedLists(savedText) as ArrayList<String>/*ListSort().getMergingBranchedLists(savedText) as ArrayList<String>*/
+    override fun setSortedStringList() = listSort.getMergingBranchedLists(savedText) as ArrayList<String>
 }

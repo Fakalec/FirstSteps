@@ -3,7 +3,6 @@ package out.muravev.pv.views
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -13,28 +12,31 @@ import out.muravev.pv.contracts.SorterContract
 import out.muravev.pv.models.ApplicationGlobalModel
 import out.muravev.pv.presenters.SorterPresenterImpl
 import out.muravev.pv.routers.SorterRouterImpl
+import out.muravev.pv.toasts.ToastUtilsImpl
 
 class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
 
     private lateinit var sortPresenter: SorterPresenterImpl
-
+    private lateinit var router: SorterRouterImpl
+    private lateinit var toast: ToastUtilsImpl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        router = SorterRouterImpl(this)
+        toast = ToastUtilsImpl()
         sortPresenter =
-            SorterPresenterImpl((application as ApplicationGlobalModel).listModel, this,
-                SorterRouterImpl(this)
-            )
+            SorterPresenterImpl((application as ApplicationGlobalModel).listModel, this)
+        recycler.layoutManager = LinearLayoutManager(this)
 
         initListeners()
     }
+
 
     private fun initListeners() {
         add_button.setOnClickListener { sortPresenter.onAddButtonClicked() }
 
         sort_button.setOnClickListener { sortPresenter.onSortButtonClicked() }
-
 
         edit_string.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) =
@@ -46,29 +48,25 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
         })
     }
 
-    override fun showEmptyListToast() {
-        val emptyListNotification =
-            Toast.makeText(this, getString(R.string.empty_list_toast), Toast.LENGTH_SHORT) // todo
-        emptyListNotification.show()
+    override fun goToResultScreen() {
+        router.openResultScreen()
     }
 
-    override fun showEmptyEditToast() {
-        val emptyLineNotification = Toast.makeText(this, getString(R.string.empty_edit_toast), Toast.LENGTH_SHORT)
-        emptyLineNotification.show()
+    override fun showToast(message: String) {
+        toast.errorToast(message, this)
     }
 
-    override fun updateList(adapter: RecyclerAdapter) { // ? логика добавления адаптера...
-        recycler.layoutManager = LinearLayoutManager(this) // manager?
-        recycler.adapter = adapter/*RecyclerAdapter(this, list) // убрать адаптер в параметры?*/
+    override fun updateList(updateList: List<String>) {
+        recycler.adapter = RecyclerAdapter(this, updateList)
     }
 
     override fun updateEditText(updateString: String) {
         edit_string.text = Editable.Factory.getInstance().newEditable(updateString)
     }
 
-    override fun refreshAdapter(adapter: RecyclerAdapter) { // ?
-        recycler.adapter = adapter
+    override fun refreshAdapter(emptyList: List<String>) {
+        recycler.adapter = RecyclerAdapter(this, emptyList)
     }
 
-    override fun returnContext() = this // ?! возврат контекста для последующего использования в роутере
+    override fun returnContext() = this // ?! возврат контекста для тоста
 }

@@ -1,22 +1,21 @@
 package out.muravev.pv.contracts
 
 import android.content.Context
-import out.muravev.pv.adapters.RecyclerAdapter
 
 interface SorterContract {
 
-    interface SortAlgorythm {
+    interface SortAlgorithm {
         fun getMergingBranchedLists(listOfString: List<String>): List<String>
         fun sortListValues(smallerValueList: List<String>, biggerValueList: List<String>): List<String>
     }
 
     interface SorterView {
-        fun updateList(adapter: RecyclerAdapter)
-        fun showEmptyEditToast()
-        fun showEmptyListToast()
+        fun updateList(updateList: List<String>)
+        fun showToast(message: String)
         fun updateEditText(updateString: String)
-        fun refreshAdapter(adapter: RecyclerAdapter)
+        fun refreshAdapter(emptyList: List<String>)
         fun returnContext(): Context
+        fun goToResultScreen()
     }
 
     interface ResultView {
@@ -24,7 +23,7 @@ interface SorterContract {
         fun backToSorterActivity()
     }
 
-    interface SorterPresenter { // todo translate to russian language
+    interface SorterPresenter {
         fun onSortButtonClicked()
         fun onAddButtonClicked()
         fun onTextEdited(text: String)
@@ -37,13 +36,19 @@ interface SorterContract {
 
     interface SorterRouter {
         fun openResultScreen()
+        fun returnToMainScreen()
     }
 
     interface SorterModel {
-        fun setTypedText(): String
         fun getTypedText(text: String)
-        fun setStringList(): ArrayList<String> // ?
+        fun setStringList(): ArrayList<String>
         fun getSortedList(sortedList: ArrayList<String>)
-        fun setSortedStringList(): ArrayList<String> // ?
+        fun setSortedStringList(): ArrayList<String>
+        fun setEmptyTextToEdit(): String
+        fun setTypedText(): String
+    }
+
+    interface ToastUtils {
+        fun errorToast(message: String, context: Context)
     }
 }

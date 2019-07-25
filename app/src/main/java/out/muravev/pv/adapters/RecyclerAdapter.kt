@@ -15,11 +15,7 @@ class RecyclerAdapter(private var context: Context, private var dataList: List<S
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         return RecyclerViewHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.recycler_view,
-                parent,
-                false
-            )
+            LayoutInflater.from(context).inflate(R.layout.recycler_view, parent, false)
         )
     }
 

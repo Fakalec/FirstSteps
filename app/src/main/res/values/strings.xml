@@ -2,8 +2,8 @@
     <string name="app_name">SortyMorty</string>
     <string name="add_button">Add</string>
     <string name="sort_button">Sort</string>
-    <string name="add_string">Type string</string>
-    <string name="hello">Welcome to string sorter</string>
+    <string name="edit_string">Type text</string>
+    <string name="welcome_text">Welcome to string sorter</string>
     <string name="result_text">Result text</string>
     <string name="empty_edit_toast">empty edit line</string>
     <string name="empty_list_toast">empty list items</string>

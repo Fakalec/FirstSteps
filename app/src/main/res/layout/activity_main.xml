@@ -13,8 +13,8 @@
             android:id="@+id/hello_text"
             android:textSize="25sp"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/hello"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_text"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display3"/>
 
@@ -41,7 +41,7 @@
                 android:layout_marginRight="16dp"
                 android:textColor="@color/color_dark"
                 android:textColorHint="@color/color_gray"
-                android:hint="@string/add_string"
+                android:hint="@string/edit_string"
                 android:inputType="text"
                 android:importantForAutofill="no"
                 tools:targetApi="o"/>
