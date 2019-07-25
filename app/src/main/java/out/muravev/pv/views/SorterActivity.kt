@@ -18,15 +18,17 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
 
     private lateinit var sortPresenter: SorterPresenterImpl
     private lateinit var router: SorterRouterImpl
-    private lateinit var toast: ToastUtilsImpl
+    private lateinit var toastUtil: ToastUtilsImpl
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         router = SorterRouterImpl(this)
-        toast = ToastUtilsImpl()
+        toastUtil = ToastUtilsImpl()
         sortPresenter =
             SorterPresenterImpl((application as ApplicationGlobalModel).listModel, this)
+
         recycler.layoutManager = LinearLayoutManager(this)
 
         initListeners()
@@ -36,7 +38,9 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
     private fun initListeners() {
         add_button.setOnClickListener { sortPresenter.onAddButtonClicked() }
 
-        sort_button.setOnClickListener { sortPresenter.onSortButtonClicked() }
+        sort_button.setOnClickListener {
+            sortPresenter.onSortButtonClicked()
+        }
 
         edit_string.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) =
@@ -52,21 +56,23 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
         router.openResultScreen()
     }
 
-    override fun showToast(message: String) {
-        toast.errorToast(message, this)
+    override fun showEmptyListMessage() {
+        toastUtil.errorToast(getString(R.string.empty_list_toast), this)
+    }
+
+    override fun showNoTextEnteredMessage() {
+        toastUtil.errorToast(getString(R.string.empty_edit_toast), this)
     }
 
     override fun updateList(updateList: List<String>) {
         recycler.adapter = RecyclerAdapter(this, updateList)
     }
 
-    override fun updateEditText(updateString: String) {
-        edit_string.text = Editable.Factory.getInstance().newEditable(updateString)
+    override fun updateEditText(emptyString: String) {
+        edit_string.setText(emptyString)
     }
 
     override fun refreshAdapter(emptyList: List<String>) {
         recycler.adapter = RecyclerAdapter(this, emptyList)
     }
-
-    override fun returnContext() = this // ?! возврат контекста для тоста
 }

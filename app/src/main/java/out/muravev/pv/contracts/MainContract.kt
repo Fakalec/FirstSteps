@@ -4,18 +4,13 @@ import android.content.Context
 
 interface SorterContract {
 
-    interface SortAlgorithm {
-        fun getMergingBranchedLists(listOfString: List<String>): List<String>
-        fun sortListValues(smallerValueList: List<String>, biggerValueList: List<String>): List<String>
-    }
-
     interface SorterView {
         fun updateList(updateList: List<String>)
-        fun showToast(message: String)
-        fun updateEditText(updateString: String)
         fun refreshAdapter(emptyList: List<String>)
-        fun returnContext(): Context
         fun goToResultScreen()
+        fun showEmptyListMessage()
+        fun showNoTextEnteredMessage()
+        fun updateEditText(emptyString: String)
     }
 
     interface ResultView {
@@ -40,12 +35,15 @@ interface SorterContract {
     }
 
     interface SorterModel {
-        fun getTypedText(text: String)
-        fun setStringList(): ArrayList<String>
-        fun getSortedList(sortedList: ArrayList<String>)
-        fun setSortedStringList(): ArrayList<String>
-        fun setEmptyTextToEdit(): String
-        fun setTypedText(): String
+        fun hasEnteredText(): Boolean
+        fun setTypedText(text: String)
+        fun addNewItem()
+        fun clearEnteredText()
+        fun getList(): List<String>
+        fun isNotEmptyList(): Boolean
+        fun sortList()
+        fun getSortedList(): String
+        fun clearList()
     }
 
     interface ToastUtils {

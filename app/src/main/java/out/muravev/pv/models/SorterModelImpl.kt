@@ -1,25 +1,38 @@
 package out.muravev.pv.models
 
+import out.muravev.pv.algorithms.ListSort
 import out.muravev.pv.contracts.SorterContract
 
-class SorterModelImpl(private val listSort: SorterContract.SortAlgorithm) : SorterContract.SorterModel {
+class SorterModelImpl(private val listSort: ListSort) : SorterContract.SorterModel {
 
-    private var savedText: ArrayList<String> = arrayListOf()
-    private var typedText: String = ""
+    private var savedList: ArrayList<String> = arrayListOf()
+    private var savedString: String = ""
 
-    override fun setEmptyTextToEdit() = ""
+    override fun hasEnteredText() = savedString != ""
 
-    override fun getTypedText(text: String) {
-        typedText = text
+    override fun setTypedText(text: String) {
+        savedString = text
     }
 
-    override fun getSortedList(sortedList: ArrayList<String>) {
-        savedText = sortedList
+    override fun addNewItem() {
+        savedList.add(savedString)
     }
 
-    override fun setTypedText() = typedText
+    override fun clearEnteredText() {
+        savedString = ""
+    }
 
-    override fun setStringList() = savedText
+    override fun getList() = savedList
 
-    override fun setSortedStringList() = listSort.getMergingBranchedLists(savedText) as ArrayList<String>
+    override fun isNotEmptyList() = savedList.isNotEmpty()
+
+    override fun sortList() {
+        savedList = listSort.getMergingBranchedLists(savedList) as ArrayList<String>
+    }
+
+    override fun getSortedList() = savedList.toString()
+
+    override fun clearList() {
+        savedList.clear()
+    }
 }

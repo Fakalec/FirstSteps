@@ -9,11 +9,11 @@ class ResultPresenterImpl(
     SorterContract.ResultPresenter {
 
     override fun onScreenOpened() {
-        view.viewResultText(model.setStringList().toString())
+        view.viewResultText(model.getSortedList())
     }
 
     override fun onOkButtonClicked() {
-        model.setStringList().clear()
+        model.clearList()
         view.backToSorterActivity()
     }
 }

@@ -13,13 +13,20 @@ class ResultActivity : AppCompatActivity(), SorterContract.ResultView {
 
     private lateinit var resultPresenter: ResultPresenterImpl
     private lateinit var router: SorterContract.SorterRouter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.result_activity)
+
         router = SorterRouterImpl(this)
         resultPresenter = ResultPresenterImpl((application as ApplicationGlobalModel).listModel, this)
 
         resultPresenter.onScreenOpened()
+
+        initListeners()
+    }
+
+    private fun initListeners() {
         button.setOnClickListener { resultPresenter.onOkButtonClicked() }
     }
 
@@ -28,6 +35,6 @@ class ResultActivity : AppCompatActivity(), SorterContract.ResultView {
     }
 
     override fun viewResultText(resultText: String) {
-        result_text_view.text = resultText // запихивание значения из параметра во вью элемент...
+        result_text_view.text = resultText
     }
 }

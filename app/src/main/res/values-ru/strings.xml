@@ -4,7 +4,7 @@
     <string name="add_button">Добавить</string>
     <string name="sort_button">Отсортировать</string>
     <string name="edit_string">Введите текст</string>
-    <string name="welcome_text">Добро пожаловать в сортировщик строк</string>
+    <string name="welcome_text">Добро пожаловать в строковый сортировщик</string>
     <string name="result_text">Результат сортировки</string>
     <string name="empty_edit_toast">Пустая строка ввода</string>
     <string name="empty_list_toast">Пустой список</string>

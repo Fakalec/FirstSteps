@@ -2,11 +2,11 @@ package out.muravev.pv.algorithms
 
 import out.muravev.pv.contracts.SorterContract
 
-class ListSort: SorterContract.SortAlgorithm {
+class ListSort {
 
     // Рекурсивная функция, которая будет принимать лист строк и разделять их.
 
-    override fun getMergingBranchedLists(listOfString: List<String>): List<String> {
+    fun getMergingBranchedLists(listOfString: List<String>): List<String> {
 
         if (listOfString.size <= 1) // якорь рекурсии
             return listOfString
@@ -20,7 +20,7 @@ class ListSort: SorterContract.SortAlgorithm {
 
     // Функция сортировки принимает подлисты малых и бОльших значений и сортирует их (меньшие в начало, бОльшие в конец)
 
-    override fun sortListValues(smallerValueList: List<String>, biggerValueList: List<String>): List<String> {
+    fun sortListValues(smallerValueList: List<String>, biggerValueList: List<String>): List<String> {
 
         var leftHandIndex = 0
         var rightHandIndex = 0
