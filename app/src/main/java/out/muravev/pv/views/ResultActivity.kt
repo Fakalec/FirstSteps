@@ -1,7 +1,7 @@
 package out.muravev.pv.views
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.result_activity.*
 import out.muravev.pv.R
 import out.muravev.pv.contracts.SorterContract
@@ -18,13 +18,15 @@ class ResultActivity : AppCompatActivity(), SorterContract.ResultView {
 
         resultPresenter = ResultPresenterImpl((application as ApplicationGlobalModel).listModel, this)
 
-        resultPresenter.viewSortResult() // onScreenOpened
-        button.setOnClickListener { resultPresenter.onOkButtonClicked()
-            finish()
-        }
+        resultPresenter.onScreenOpened()
+        button.setOnClickListener { resultPresenter.onOkButtonClicked() }
+    }
+
+    override fun backToSorterActivity() {
+        finish()
     }
 
     override fun viewResultText(resultText: String) {
-        result_text_view.text = resultText
+        result_text_view.text = resultText // запихивание значения из параметра во вью элемент...
     }
 }

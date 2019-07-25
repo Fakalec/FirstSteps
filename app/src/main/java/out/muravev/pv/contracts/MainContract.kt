@@ -1,24 +1,27 @@
 package out.muravev.pv.contracts
 
 import android.content.Context
-import android.content.Intent
-import android.widget.Adapter
 import out.muravev.pv.adapters.RecyclerAdapter
 
 interface SorterContract {
 
+    interface SortAlgorythm {
+        fun getMergingBranchedLists(listOfString: List<String>): List<String>
+        fun sortListValues(smallerValueList: List<String>, biggerValueList: List<String>): List<String>
+    }
+
     interface SorterView {
-        fun updateList(list: ArrayList<String>)
+        fun updateList(adapter: RecyclerAdapter)
         fun showEmptyEditToast()
         fun showEmptyListToast()
         fun updateEditText(updateString: String)
         fun refreshAdapter(adapter: RecyclerAdapter)
-        fun returnIntent(intent: Intent)
         fun returnContext(): Context
     }
 
     interface ResultView {
         fun viewResultText(resultText: String)
+        fun backToSorterActivity()
     }
 
     interface SorterPresenter { // todo translate to russian language
@@ -28,7 +31,7 @@ interface SorterContract {
     }
 
     interface ResultPresenter {
-        fun viewSortResult()
+        fun onScreenOpened()
         fun onOkButtonClicked()
     }
 
@@ -41,6 +44,6 @@ interface SorterContract {
         fun getTypedText(text: String)
         fun setStringList(): ArrayList<String> // ?
         fun getSortedList(sortedList: ArrayList<String>)
-        fun sortedStringList(): ArrayList<String> // ?
+        fun setSortedStringList(): ArrayList<String> // ?
     }
 }

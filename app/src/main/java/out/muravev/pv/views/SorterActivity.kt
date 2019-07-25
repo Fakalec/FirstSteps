@@ -1,7 +1,5 @@
 package out.muravev.pv.views
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,12 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import out.muravev.pv.R
-import out.muravev.pv.Routers.SorterRouterImpl
-//import out.muravev.pv.Routers.SorterRouterImpl
+import out.muravev.pv.adapters.RecyclerAdapter
 import out.muravev.pv.contracts.SorterContract
 import out.muravev.pv.models.ApplicationGlobalModel
-import out.muravev.pv.adapters.RecyclerAdapter
 import out.muravev.pv.presenters.SorterPresenterImpl
+import out.muravev.pv.routers.SorterRouterImpl
 
 class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
 
@@ -25,7 +22,10 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        sortPresenter = SorterPresenterImpl((application as ApplicationGlobalModel).listModel, this, SorterRouterImpl(this))
+        sortPresenter =
+            SorterPresenterImpl((application as ApplicationGlobalModel).listModel, this,
+                SorterRouterImpl(this)
+            )
 
         initListeners()
     }
@@ -33,10 +33,7 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
     private fun initListeners() {
         add_button.setOnClickListener { sortPresenter.onAddButtonClicked() }
 
-        sort_button.setOnClickListener { sortPresenter.onSortButtonClicked()
-//            val resultIntent = Intent(this, ResultActivity::class.java)
-//            startActivity(resultIntent)
-        }
+        sort_button.setOnClickListener { sortPresenter.onSortButtonClicked() }
 
 
         edit_string.addTextChangedListener(object : TextWatcher {
@@ -50,7 +47,8 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
     }
 
     override fun showEmptyListToast() {
-        val emptyListNotification = Toast.makeText(this, getString(R.string.empty_list_toast), Toast.LENGTH_SHORT) // todo
+        val emptyListNotification =
+            Toast.makeText(this, getString(R.string.empty_list_toast), Toast.LENGTH_SHORT) // todo
         emptyListNotification.show()
     }
 
@@ -59,22 +57,18 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
         emptyLineNotification.show()
     }
 
-    override fun updateList(list: ArrayList<String>) {
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = RecyclerAdapter(this, list)
+    override fun updateList(adapter: RecyclerAdapter) { // ? логика добавления адаптера...
+        recycler.layoutManager = LinearLayoutManager(this) // manager?
+        recycler.adapter = adapter/*RecyclerAdapter(this, list) // убрать адаптер в параметры?*/
     }
 
     override fun updateEditText(updateString: String) {
         edit_string.text = Editable.Factory.getInstance().newEditable(updateString)
     }
 
-    override fun refreshAdapter(adapter: RecyclerAdapter) {
+    override fun refreshAdapter(adapter: RecyclerAdapter) { // ?
         recycler.adapter = adapter
     }
 
-    override fun returnContext() = this
-
-    override fun returnIntent(intent: Intent) {
-//        startActivity(intent)
-    }
+    override fun returnContext() = this // ?! возврат контекста для последующего использования в роутере
 }
