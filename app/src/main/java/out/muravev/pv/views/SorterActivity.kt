@@ -34,7 +34,6 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
         initListeners()
     }
 
-
     private fun initListeners() {
         add_button.setOnClickListener { sortPresenter.onAddButtonClicked() }
 
@@ -57,22 +56,22 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
     }
 
     override fun showEmptyListMessage() {
-        toastUtil.errorToast(getString(R.string.empty_list_toast), this)
+        toastUtil.errorToast(R.string.empty_list_toast, this)
     }
 
     override fun showNoTextEnteredMessage() {
-        toastUtil.errorToast(getString(R.string.empty_edit_toast), this)
+        toastUtil.errorToast(R.string.empty_edit_toast, this)
     }
 
     override fun updateList(updateList: List<String>) {
         recycler.adapter = RecyclerAdapter(this, updateList)
     }
 
-    override fun updateEditText(emptyString: String) {
-        edit_string.setText(emptyString)
+    override fun clearEditText() {
+        edit_string.setText("")
     }
 
-    override fun refreshAdapter(emptyList: List<String>) {
-        recycler.adapter = RecyclerAdapter(this, emptyList)
+    override fun clearList() {
+        recycler.adapter = RecyclerAdapter(this, emptyList())
     }
 }

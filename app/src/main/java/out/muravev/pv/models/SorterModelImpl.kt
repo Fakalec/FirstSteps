@@ -8,7 +8,8 @@ class SorterModelImpl(private val listSort: ListSort) : SorterContract.SorterMod
     private var savedList: ArrayList<String> = arrayListOf()
     private var savedString: String = ""
 
-    override fun hasEnteredText() = savedString != ""
+    override fun hasEnteredText() =
+        savedString.isNotEmpty()
 
     override fun setTypedText(text: String) {
         savedString = text
@@ -22,15 +23,19 @@ class SorterModelImpl(private val listSort: ListSort) : SorterContract.SorterMod
         savedString = ""
     }
 
-    override fun getList() = savedList
+    override fun getUnsortedList() =
+        savedList
 
-    override fun isNotEmptyList() = savedList.isNotEmpty()
+    override fun isNotEmptyList() =
+        savedList.isNotEmpty()
 
     override fun sortList() {
-        savedList = listSort.getMergingBranchedLists(savedList) as ArrayList<String>
+        val sortedList: List<String> = listSort.getMergingBranchedLists(savedList)
+        savedList = ArrayList(sortedList)
     }
 
-    override fun getSortedList() = savedList.toString()
+    override fun getSortedListResult() =
+        savedList.toString()
 
     override fun clearList() {
         savedList.clear()

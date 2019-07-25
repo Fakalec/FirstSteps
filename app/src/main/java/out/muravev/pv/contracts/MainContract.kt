@@ -1,16 +1,19 @@
 package out.muravev.pv.contracts
 
 import android.content.Context
+import androidx.annotation.StringRes
+
+//E/RecyclerView: No adapter attached; skipping layout
 
 interface SorterContract {
 
     interface SorterView {
         fun updateList(updateList: List<String>)
-        fun refreshAdapter(emptyList: List<String>)
+        fun clearList()
         fun goToResultScreen()
         fun showEmptyListMessage()
         fun showNoTextEnteredMessage()
-        fun updateEditText(emptyString: String)
+        fun clearEditText()
     }
 
     interface ResultView {
@@ -39,14 +42,14 @@ interface SorterContract {
         fun setTypedText(text: String)
         fun addNewItem()
         fun clearEnteredText()
-        fun getList(): List<String>
+        fun getUnsortedList(): List<String>
         fun isNotEmptyList(): Boolean
         fun sortList()
-        fun getSortedList(): String
+        fun getSortedListResult(): String
         fun clearList()
     }
 
     interface ToastUtils {
-        fun errorToast(message: String, context: Context)
+        fun errorToast(@StringRes messageResId: Int, context: Context)
     }
 }

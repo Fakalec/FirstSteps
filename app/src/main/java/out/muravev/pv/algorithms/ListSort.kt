@@ -1,7 +1,5 @@
 package out.muravev.pv.algorithms
 
-import out.muravev.pv.contracts.SorterContract
-
 class ListSort {
 
     // Рекурсивная функция, которая будет принимать лист строк и разделять их.

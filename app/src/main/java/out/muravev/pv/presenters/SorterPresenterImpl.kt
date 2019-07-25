@@ -3,6 +3,7 @@ package out.muravev.pv.presenters
 import out.muravev.pv.contracts.SorterContract
 
 class SorterPresenterImpl(
+
     private val model: SorterContract.SorterModel,
     private val view: SorterContract.SorterView
 ) :
@@ -12,19 +13,19 @@ class SorterPresenterImpl(
         if (model.hasEnteredText()) {
             model.addNewItem()
             model.clearEnteredText()
-            view.updateList(model.getList())
+            view.updateList(model.getUnsortedList())
+            view.clearEditText()
         } else {
             view.showNoTextEnteredMessage()
         }
-        view.updateEditText("")
     }
 
     override fun onSortButtonClicked() {
         if (model.isNotEmptyList()) {
             model.sortList()
             view.goToResultScreen()
-            view.refreshAdapter(emptyList())
-            view.updateEditText("")
+            view.clearList()
+            view.clearEditText()
         } else {
             view.showEmptyListMessage()
         }
