@@ -5,8 +5,8 @@ import out.muravev.pv.contracts.SorterContract
 
 class SorterModelImpl(private val listSort: ListSort) : SorterContract.SorterModel {
 
-    private var savedList: ArrayList<String> = arrayListOf()
-    private var savedString: String = ""
+    var savedList: ArrayList<String> = arrayListOf()    // need to private?
+    var savedString: String = ""                        // need to private?
 
     override fun hasEnteredText() =
         savedString.isNotEmpty()

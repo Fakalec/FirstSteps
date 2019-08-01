@@ -30,8 +30,14 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
             SorterPresenterImpl((application as ApplicationGlobalModel).listModel, this)
 
         recycler.layoutManager = LinearLayoutManager(this)
-
+        recycler.adapter = RecyclerAdapter(this, listOf())
         initListeners()
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        sortPresenter.screenRotationUpdate()
     }
 
     private fun initListeners() {
@@ -51,6 +57,10 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
         })
     }
 
+    override fun updateRecyclerWhenRotate(updateList: List<String>) {
+        recycler.adapter = RecyclerAdapter(this, updateList)
+    }
+
     override fun goToResultScreen() {
         router.openResultScreen()
     }
@@ -61,6 +71,10 @@ class SorterActivity : AppCompatActivity(), SorterContract.SorterView {
 
     override fun showNoTextEnteredMessage() {
         toastUtil.errorToast(R.string.empty_edit_toast, this)
+    }
+
+    override fun showFilledInputNotification() {
+        toastUtil.errorToast(R.string.filled_field_toast, this)
     }
 
     override fun updateList(updateList: List<String>) {

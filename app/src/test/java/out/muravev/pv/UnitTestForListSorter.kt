@@ -4,7 +4,7 @@ import org.junit.Test
 import out.muravev.pv.algorithms.ListSort
 
 /**
- * In this file you can see Unit tests for ListSorter
+ * In this file you can see tests for ListSorter
  * It consists of:
  *
  * 1. null input string

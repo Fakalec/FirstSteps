@@ -5,6 +5,7 @@
     <string name="edit_string">Type text</string>
     <string name="welcome_text">Welcome to string sorter</string>
     <string name="result_text">Result text</string>
-    <string name="empty_edit_toast">empty edit line</string>
-    <string name="empty_list_toast">empty list items</string>
+    <string name="empty_edit_toast">Empty edit line</string>
+    <string name="empty_list_toast">Empty list items</string>
+    <string name="filled_field_toast">Input field is filled in</string>
 </resources>

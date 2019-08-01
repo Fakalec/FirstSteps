@@ -8,4 +8,5 @@
     <string name="result_text">Результат сортировки</string>
     <string name="empty_edit_toast">Пустая строка ввода</string>
     <string name="empty_list_toast">Пустой список</string>
+    <string name="filled_field_toast">Строка ввода заполнена</string>
 </resources>

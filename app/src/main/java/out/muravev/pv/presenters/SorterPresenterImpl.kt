@@ -21,11 +21,13 @@ class SorterPresenterImpl(
     }
 
     override fun onSortButtonClicked() {
-        if (model.isNotEmptyList()) {
+        if (model.isNotEmptyList() && !model.hasEnteredText()) {
             model.sortList()
             view.goToResultScreen()
             view.clearList()
             view.clearEditText()
+        } else if (model.hasEnteredText()) {
+            view.showFilledInputNotification()
         } else {
             view.showEmptyListMessage()
         }
@@ -33,5 +35,9 @@ class SorterPresenterImpl(
 
     override fun onTextEdited(text: String) {
         model.setTypedText(text)
+    }
+
+    override fun screenRotationUpdate() {
+        view.updateList(model.getUnsortedList())
     }
 }

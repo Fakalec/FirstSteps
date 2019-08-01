@@ -3,8 +3,6 @@ package out.muravev.pv.contracts
 import android.content.Context
 import androidx.annotation.StringRes
 
-//E/RecyclerView: No adapter attached; skipping layout
-
 interface SorterContract {
 
     interface SorterView {
@@ -13,7 +11,9 @@ interface SorterContract {
         fun goToResultScreen()
         fun showEmptyListMessage()
         fun showNoTextEnteredMessage()
+        fun showFilledInputNotification()
         fun clearEditText()
+        fun updateRecyclerWhenRotate(updateList: List<String>)
     }
 
     interface ResultView {
@@ -25,6 +25,7 @@ interface SorterContract {
         fun onSortButtonClicked()
         fun onAddButtonClicked()
         fun onTextEdited(text: String)
+        fun screenRotationUpdate()
     }
 
     interface ResultPresenter {

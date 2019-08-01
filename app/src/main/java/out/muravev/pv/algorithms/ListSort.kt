@@ -18,7 +18,7 @@ class ListSort {
 
     // Функция сортировки принимает подлисты малых и бОльших значений и сортирует их (меньшие в начало, бОльшие в конец)
 
-    fun sortListValues(smallerValueList: List<String>, biggerValueList: List<String>): List<String> {
+    private fun sortListValues(smallerValueList: List<String>, biggerValueList: List<String>): List<String> {
 
         var leftHandIndex = 0
         var rightHandIndex = 0

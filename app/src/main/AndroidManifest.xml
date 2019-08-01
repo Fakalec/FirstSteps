@@ -12,9 +12,11 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".views.ResultActivity"/>
+        <activity android:name=".views.ResultActivity"
+                  android:screenOrientation="sensor"/>
 
-        <activity android:name=".views.SorterActivity">
+        <activity android:name=".views.SorterActivity"
+                  android:screenOrientation="sensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
