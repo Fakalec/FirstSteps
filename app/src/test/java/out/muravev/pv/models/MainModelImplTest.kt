@@ -8,13 +8,13 @@ import out.muravev.pv.algorithms.ListSort
  * It consists of all model methods
  */
 
-class SorterModelImplTest {
+class MainModelImplTest {
 
     private var sortAlgorithm: ListSort = ListSort()
-    private var model = SorterModelImpl(sortAlgorithm)
+    private var model = MainModelImpl(sortAlgorithm)
 
     @Test
-    fun `check hasEnteredText method when nothing entered in the input line`() {
+    fun `hasEnteredText method when nothing entered in the input line`() {
         model.savedString = ""
         val isTextSave = model.hasEnteredText()
         val expected = false
@@ -22,7 +22,7 @@ class SorterModelImplTest {
     }
 
     @Test
-    fun `check hasEnteredText method when something entered in the input line`() {
+    fun `hasEnteredText method when something entered in the input line`() {
         model.savedString = "something"
         val isTextSave = model.hasEnteredText()
         val expected = true
@@ -30,7 +30,7 @@ class SorterModelImplTest {
     }
 
     @Test
-    fun `check setTypedText method when nothing typed in`() {
+    fun `setTypedText method when nothing typed in`() {
         model.setTypedText("")
         val typedText = model.savedString
         val expected = ""
@@ -38,7 +38,7 @@ class SorterModelImplTest {
     }
 
     @Test
-    fun `check setTypedText method when something typed in`() {
+    fun `setTypedText method when something typed in`() {
         model.setTypedText("something")
         val typedText = model.savedString
         val expected = "something"
@@ -46,7 +46,7 @@ class SorterModelImplTest {
     }
 
     @Test
-    fun `check addNewItem method when no item to add`() {
+    fun `addNewItem method when no item to add`() {
         model.savedString = ""
         model.addNewItem()
         val emptyStringAdded = model.savedList
@@ -55,7 +55,7 @@ class SorterModelImplTest {
     }
 
     @Test
-    fun `check addNewItem method when "something" string added`() {
+    fun `addNewItem method when "something" string added`() {
         model.savedString = "something"
         model.addNewItem()
         val somethingStringAdded = model.savedList
@@ -64,7 +64,7 @@ class SorterModelImplTest {
     }
 
     @Test
-    fun `check clearEnteredText method`() {
+    fun `clearEnteredText method`() {
         model.savedString = "need to clear"
         model.clearEnteredText()
         val cleanString = model.savedString
@@ -73,7 +73,7 @@ class SorterModelImplTest {
     }
 
     @Test
-    fun `check getUnsortedList method`() {
+    fun `getUnsortedList method`() {
         model.savedList = arrayListOf("Kotlin", "Java", "Gradle", "Maven")
         val unsortedList = model.getUnsortedList()
         val expected = arrayListOf("Kotlin", "Java", "Gradle", "Maven")
@@ -81,7 +81,7 @@ class SorterModelImplTest {
     }
 
     @Test
-    fun `check isNotEmptyList method when the list is empty`() {
+    fun `isNotEmptyList method when the list is empty`() {
         model.savedList = arrayListOf()
         val emptyListResult = model.isNotEmptyList()
         val expected = false
@@ -89,7 +89,7 @@ class SorterModelImplTest {
     }
 
     @Test
-    fun `check isNotEmptyList method when the list is not empty`() {
+    fun `isNotEmptyList method when the list is not empty`() {
         model.savedList = arrayListOf("peppa", "the", "pig")
         val emptyListResult = model.isNotEmptyList()
         val expected = true
@@ -97,7 +97,7 @@ class SorterModelImplTest {
     }
 
     @Test
-    fun `check sortList method with unsorted strings`() {
+    fun `sortList method with unsorted strings`() {
         model.savedList = arrayListOf("phoenix", "meepo", "kunkka", "naga siren")
         model.sortList()
         val sortedList = model.savedList
@@ -106,7 +106,7 @@ class SorterModelImplTest {
     }
 
     @Test
-    fun `check getSortedListResult method that returns string`() {
+    fun `getSortedListResult method that returns string`() {
         model.savedList = arrayListOf("apple", "mango", "orange", "strawberry")
         val returnSortedListToString = model.getSortedListResult()
         val expected = "[apple, mango, orange, strawberry]"
@@ -114,7 +114,7 @@ class SorterModelImplTest {
     }
 
     @Test
-    fun `check clearList method`() {
+    fun `clearList method`() {
         model.savedList = arrayListOf("mouse", "keyboard")
         model.clearList()
         val clearList = model.savedList

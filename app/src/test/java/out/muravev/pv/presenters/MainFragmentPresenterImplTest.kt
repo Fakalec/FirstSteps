@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Test
-import out.muravev.pv.contracts.SorterContract
+import out.muravev.pv.contracts.MainContract
 
 /**
  * In this file you can see tests for SorterPresenter
@@ -19,16 +19,18 @@ import out.muravev.pv.contracts.SorterContract
  * 7. checking onTextEdited method with something text edited
  */
 
-class SorterPresenterImplTest {
+class MainFragmentPresenterImplTest {
 
-    private var model: SorterContract.SorterModel = mock()
-    private var view: SorterContract.SorterView = mock()
-    private var presenter = SorterPresenterImpl(model, view)
+    private var model: MainContract.SorterModel = mock()
+    private var view: MainContract.SorterView = mock()
+    private var presenter = MainFragmentPresenterImpl(model, view)
 
     @Test
-    fun `check onAddButtonClicked method when text has entered`() {
+    fun `onAddButtonClicked method when text has entered`() {
         whenever(model.hasEnteredText()).thenReturn(true)
+
         presenter.onAddButtonClicked()
+
         verify(view).updateList(listOf())
         verify(model).addNewItem()
         verify(model).clearEnteredText()
@@ -36,16 +38,20 @@ class SorterPresenterImplTest {
     }
 
     @Test
-    fun `check onAddButtonClicked method when text has not entered`() {
+    fun `onAddButtonClicked method when text has not entered`() {
         whenever(model.hasEnteredText()).thenReturn(false)
+
         presenter.onAddButtonClicked()
+
         verify(view).showNoTextEnteredMessage()
     }
 
     @Test
-    fun `check onSortButtonClicked method list of items is not empty`() {
+    fun `onSortButtonClicked method list of items is not empty`() {
         whenever(model.isNotEmptyList()).thenReturn(true)
+
         presenter.onSortButtonClicked()
+
         verify(model).sortList()
         verify(view).goToResultScreen()
         verify(view).clearList()
@@ -53,29 +59,35 @@ class SorterPresenterImplTest {
     }
 
     @Test
-    fun `check onSortButtonClicked method list of items is empty and input line is not empty`() {
+    fun `onSortButtonClicked method list of items is empty and input line is not empty`() {
         whenever(model.isNotEmptyList()).thenReturn(true)
         whenever(model.hasEnteredText()).thenReturn(true)
+
         presenter.onSortButtonClicked()
+
         verify(view).showFilledInputNotification()
     }
 
     @Test
-    fun `check onSortButtonClicked method list of items is empty`() {
+    fun `onSortButtonClicked method list of items is empty`() {
         whenever(model.hasEnteredText()).thenReturn(false)
+
         presenter.onSortButtonClicked()
+
         verify(view).showEmptyListMessage()
     }
 
     @Test
-    fun `check onTextEdited method when no text edited`() {
+    fun `onTextEdited method when no text edited`() {
         presenter.onTextEdited("")
+
         verify(model).setTypedText("")
     }
 
     @Test
-    fun `check onTextEdited method when text edited`() {
+    fun `onTextEdited method when text edited`() {
         presenter.onTextEdited("Hello!")
+
         verify(model).setTypedText("Hello!")
     }
 }

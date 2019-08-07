@@ -4,7 +4,8 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Test
-import out.muravev.pv.contracts.SorterContract
+import out.muravev.pv.contracts.MainContract
+import out.muravev.pv.contracts.ResultContract
 
 /**
  * In this file you can see tests for ResultPresenter
@@ -14,23 +15,26 @@ import out.muravev.pv.contracts.SorterContract
  * 2. checking onOkButtonClicked method that clean list and return to main screen
  */
 
-class ResultPresenterImplTest {
+class ResultFragmentPresenterImplTest {
 
-    private var model: SorterContract.SorterModel = mock()
-    private var view: SorterContract.ResultView = mock()
-    private var presenter = ResultPresenterImpl(model, view)
+    private var model: MainContract.SorterModel = mock()
+    private var fragment: ResultContract.ResultFragment = mock()
+    private var presenter = ResultFragmentPresenterImpl(model, fragment)
 
     @Test
-    fun `check onScreenOpened method`() {
+    fun `onScreenOpened method`() {
         whenever(model.getSortedListResult()).thenReturn("ABCDEFGH")
+
         presenter.onScreenOpened()
-        verify(view).viewResultText("ABCDEFGH")
+
+        verify(fragment).viewResultText("ABCDEFGH")
     }
 
     @Test
-    fun `check onOkButtonClicked`() {
+    fun `onOkButtonClicked method`() {
         presenter.onOkButtonClicked()
+
         verify(model).clearList()
-        verify(view).backToSorterActivity()
+        verify(fragment).backToMainFragment()
     }
 }

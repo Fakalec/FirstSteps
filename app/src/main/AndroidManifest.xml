@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="out.muravev.pv">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="out.muravev.pv">
 
     <application
-            android:name=".models.ApplicationGlobalModel"
+            android:name=".models.ApplicationGlobal"
             android:allowBackup="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -12,17 +13,18 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".views.ResultActivity"
-                  android:screenOrientation="sensor"/>
-
-        <activity android:name=".views.SorterActivity"
+        <activity android:name=".activities.MainActivity"
                   android:screenOrientation="sensor">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
         </activity>
+
     </application>
 
 </manifest>

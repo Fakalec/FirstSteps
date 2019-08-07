@@ -3,7 +3,7 @@ package out.muravev.pv.contracts
 import android.content.Context
 import androidx.annotation.StringRes
 
-interface SorterContract {
+interface MainContract {
 
     interface SorterView {
         fun updateList(updateList: List<String>)
@@ -11,46 +11,55 @@ interface SorterContract {
         fun goToResultScreen()
         fun showEmptyListMessage()
         fun showNoTextEnteredMessage()
-        fun showFilledInputNotification()
         fun clearEditText()
-        fun updateRecyclerWhenRotate(updateList: List<String>)
     }
 
-    interface ResultView {
-        fun viewResultText(resultText: String)
-        fun backToSorterActivity()
-    }
-
-    interface SorterPresenter {
-        fun onSortButtonClicked()
+    interface MainFragmentPresenter {
+        fun onNextButtonClicked()
         fun onAddButtonClicked()
         fun onTextEdited(text: String)
-        fun screenRotationUpdate()
+        fun onScreenOpened()// todo
+        fun onCleanButtonClicked()
+        fun onDeleteButtonClicked(itemPosition: Int)
+        }
+
+    interface ResultFragment {
+        fun viewResultText(resultText: String)
+        fun backToMainFragment()
     }
 
-    interface ResultPresenter {
+    interface ResultFragmentPresenter {
         fun onScreenOpened()
-        fun onOkButtonClicked()
+        fun onBackButtonClicked()
+        fun onSortButtonClicked()
+        fun onReverseButtonClicked()
     }
-
-    interface SorterRouter {
+    interface FragmentRouter {
         fun openResultScreen()
-        fun returnToMainScreen()
+        fun openMainScreen()
     }
 
-    interface SorterModel {
+    interface SorterModel {  // моедль в интерфейсе, если она не необходима, то как использовать ее приватные методы
         fun hasEnteredText(): Boolean
         fun setTypedText(text: String)
         fun addNewItem()
+        fun deleteItemOnPosition(itemPosition: Int)
         fun clearEnteredText()
         fun getUnsortedList(): List<String>
         fun isNotEmptyList(): Boolean
         fun sortList()
+        fun reverseList()
         fun getSortedListResult(): String
-        fun clearList()
+        fun getUnsortedListResult(): String
+        fun getClearList(): List<String>
+        fun clearLists()
+    }
+
+    interface DeviceChecker {
+        fun isDeviceTablet(): Boolean
     }
 
     interface ToastUtils {
-        fun errorToast(@StringRes messageResId: Int, context: Context)
+        fun errorToast(@StringRes messageResId: Int, context: Context?)
     }
 }

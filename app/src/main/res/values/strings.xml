@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">SortyMorty</string>
     <string name="add_button">Add</string>
+    <string name="next_button">Next</string>
     <string name="sort_button">Sort</string>
+    <string name="reverse_button">Reverse</string>
+    <string name="back_button">Back</string>
+    <string name="clean_button">Clean</string>
+    <string name="delete_button">-</string>
     <string name="edit_string">Type text</string>
     <string name="welcome_text">Welcome to string sorter</string>
     <string name="result_text">Result text</string>
