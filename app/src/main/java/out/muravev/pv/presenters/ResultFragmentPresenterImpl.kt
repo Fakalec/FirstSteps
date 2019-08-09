@@ -1,20 +1,40 @@
 package out.muravev.pv.presenters
 
 import out.muravev.pv.contracts.MainContract
+import out.muravev.pv.models.MainModelImpl
+import out.muravev.pv.routers.DeviceChecker
 
 class ResultFragmentPresenterImpl(
 
-    private val model: MainContract.SorterModel,
-    private val view: MainContract.ResultFragment
+    private val model: MainModelImpl,
+    private val view: MainContract.ResultFragment,
+    private val checkDevice: DeviceChecker
 ) :
     MainContract.ResultFragmentPresenter {
 
-    override fun onScreenOpened() {
-        view.viewResultText(model.getUnsortedListResult())
+    private val resultListener = object : MainContract.DataListener {
+        override fun onScreenChanged() {
+                view.viewResultText(model.getUnsortedListResult())
+        }
+    }
+
+    override fun onResultScreenOpened() {
+        if (checkDevice.isDeviceTablet()) {
+            model.putResultListener(resultListener)
+            model.resultScreenInitialize()
+        } else {
+                view.viewResultText(model.getUnsortedListResult())
+        }
+    }
+
+    override fun clearResultPresenterListener() {
+        model.clearResultListener()
     }
 
     override fun onBackButtonClicked() {
-        view.backToMainFragment()
+        if (!checkDevice.isDeviceTablet()) {
+            view.backToMainFragment()
+        }
     }
 
     override fun onSortButtonClicked() {

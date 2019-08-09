@@ -3,57 +3,83 @@ package out.muravev.pv.models
 import out.muravev.pv.algorithms.ListSort
 import out.muravev.pv.contracts.MainContract
 
-class MainModelImpl(private val listSort: ListSort) : MainContract.SorterModel {
+class MainModelImpl(private val listSort: ListSort) {
 
+    private var resultScreenListener: MainContract.DataListener? = null
+    private var mainScreenListener: MainContract.DataListener? = null
     private var savedSortedList: ArrayList<String> = arrayListOf()    // need to private? // todo
     private var savedString: String = ""                        // need to private?
     private var savedUnsortedList: ArrayList<String> = arrayListOf()
 
-    override fun hasEnteredText() =
+    fun putResultListener(listenerCheck: MainContract.DataListener) {
+        resultScreenListener = listenerCheck
+    }
+
+    fun putMainListener(listenerCheck: MainContract.DataListener) {
+        mainScreenListener = listenerCheck
+    }
+
+    fun clearResultListener() {
+        resultScreenListener = null
+    }
+
+    fun clearMainListener() {
+        mainScreenListener = null
+    }
+
+    fun hasEnteredText() =
         savedString.isNotEmpty()
 
-    override fun setTypedText(text: String) {
+    fun setTypedText(text: String) {
         savedString = text
     }
 
-    override fun addNewItem() {
+    fun resultScreenInitialize() {
+        resultScreenListener?.onScreenChanged()
+    }
+
+    fun mainScreenInitialize() {
+        mainScreenListener?.onScreenChanged()
+    }
+
+    fun addNewItem() {
         savedUnsortedList.add(savedString)
     }
 
-    override fun deleteItemOnPosition(itemPosition: Int) {
+    fun deleteItemOnPosition(itemPosition: Int) {
         savedUnsortedList.removeAt(itemPosition)
     }
 
-    override fun clearEnteredText() {
+    fun clearEnteredText() {
         savedString = ""
     }
 
-    override fun getClearList() =
-        emptyList<String>()
-
-    override fun getUnsortedList() =
+    fun getUnsortedList() =
         savedUnsortedList
 
-    override fun isNotEmptyList() =
+    fun getSortedList() =
+        savedSortedList
+
+    fun isNotEmptyList() =
         savedUnsortedList.isNotEmpty()
 
-    override fun sortList() {
+    fun sortList() {
         val sortedList: List<String> = listSort.getMergingBranchedLists(savedUnsortedList)
         savedSortedList = ArrayList(sortedList)
     }
 
-    override fun reverseList() {
+    fun reverseList() {
         val sortedList: List<String> = listSort.getMergingBranchedLists(savedUnsortedList).reversed()
         savedSortedList = ArrayList(sortedList)
     }
 
-    override fun getSortedListResult() =
+    fun getSortedListResult() =
         savedSortedList.toString()
 
-    override fun getUnsortedListResult() =
+    fun getUnsortedListResult() =
         savedUnsortedList.toString()
 
-    override fun clearLists() {
+    fun clearLists() {
         savedSortedList.clear()
         savedUnsortedList.clear()
     }

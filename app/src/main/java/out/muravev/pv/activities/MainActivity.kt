@@ -5,18 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import out.muravev.pv.R
 import out.muravev.pv.fragments.MainFragment
 import out.muravev.pv.fragments.ResultFragment
-import out.muravev.pv.routers.DeviceCheckerImpl
+import out.muravev.pv.routers.DeviceChecker
 
 
 class MainActivity : AppCompatActivity() {
 
-    private val checkDevice = DeviceCheckerImpl(this)
+    private val checkDevice = DeviceChecker(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (checkDevice.isDeviceTablet()) initializeMainScreenOnTablet() else initializeMainScreenOnPhone()
+        if (savedInstanceState == null) {
+            if (checkDevice.isDeviceTablet()) initializeMainScreenOnTablet() else initializeMainScreenOnPhone()
+        }
     }
 
     private fun initializeMainScreenOnPhone() {

@@ -6,10 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import out.muravev.pv.R
 import out.muravev.pv.contracts.MainContract
 
-class RecyclerAdapter(private var dataList: List<String>) :
+class RecyclerAdapter(private var dataList: List<String>, private var presenter: MainContract.HolderPresenter) :
     RecyclerView.Adapter<RecyclerViewHolder>() {
-
-    private lateinit var presenter: MainContract.MainFragmentPresenter
 
     override fun getItemCount() =
         dataList.size
@@ -24,8 +22,4 @@ class RecyclerAdapter(private var dataList: List<String>) :
         holder.stringsView.text = dataList[position]
         holder.deleteButton.setOnClickListener { presenter.onDeleteButtonClicked(position) }
     }
-
-//    private fun removeItem(position: Int) {
-//        dataList.remove
-//    }
 }

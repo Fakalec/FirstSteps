@@ -5,7 +5,8 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Test
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.contracts.ResultContract
+import out.muravev.pv.models.MainModelImpl
+import out.muravev.pv.routers.DeviceChecker
 
 /**
  * In this file you can see tests for ResultPresenter
@@ -17,24 +18,25 @@ import out.muravev.pv.contracts.ResultContract
 
 class ResultFragmentPresenterImplTest {
 
-    private var model: MainContract.SorterModel = mock()
-    private var fragment: ResultContract.ResultFragment = mock()
-    private var presenter = ResultFragmentPresenterImpl(model, fragment)
+    private var model: MainModelImpl = mock()
+    private var fragment: MainContract.ResultFragment = mock()
+    private var deviceChecker: DeviceChecker = mock()
+    private var presenter = ResultFragmentPresenterImpl(model, fragment, deviceChecker)
 
     @Test
     fun `onScreenOpened method`() {
         whenever(model.getSortedListResult()).thenReturn("ABCDEFGH")
 
-        presenter.onScreenOpened()
+        presenter.onResultScreenOpened()
 
         verify(fragment).viewResultText("ABCDEFGH")
     }
 
     @Test
     fun `onOkButtonClicked method`() {
-        presenter.onOkButtonClicked()
+        presenter.onBackButtonClicked()
 
-        verify(model).clearList()
+//        verify(model).clearList()
         verify(fragment).backToMainFragment()
     }
 }

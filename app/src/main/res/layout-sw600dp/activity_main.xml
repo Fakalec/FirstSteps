@@ -28,6 +28,7 @@
             android:id="@+id/result_container"
             android:background="@color/color_gray_light"
             app:layout_constraintVertical_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/main_container" android:layout_marginStart="8dp"/>
+            app:layout_constraintStart_toEndOf="@+id/main_container"
+            android:layout_marginStart="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

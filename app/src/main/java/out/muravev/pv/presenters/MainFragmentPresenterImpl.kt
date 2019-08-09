@@ -1,15 +1,26 @@
 package out.muravev.pv.presenters
 
-import android.annotation.SuppressLint
-import android.util.Log
 import out.muravev.pv.contracts.MainContract
+import out.muravev.pv.models.MainModelImpl
+import out.muravev.pv.routers.DeviceChecker
 
 class MainFragmentPresenterImpl(
 
-    private val model: MainContract.SorterModel,
-    private val view: MainContract.SorterView
+    private val model: MainModelImpl,
+    private val view: MainContract.SorterView,
+    private val checkDevice: DeviceChecker
 ) :
-    MainContract.MainFragmentPresenter {
+    MainContract.MainFragmentPresenter, MainContract.HolderPresenter {
+
+    private var mainListener = object : MainContract.DataListener {
+        override fun onScreenChanged() {
+            view.updateList(model.getUnsortedList())
+        }
+    }
+
+    override fun clearMainPresenterListener() {
+        model.clearMainListener()
+    }
 
     override fun onAddButtonClicked() {
         if (model.hasEnteredText()) {
@@ -22,16 +33,18 @@ class MainFragmentPresenterImpl(
         }
     }
 
-    @SuppressLint("LongLogTag")
     override fun onDeleteButtonClicked(itemPosition: Int) {
         model.deleteItemOnPosition(itemPosition)
-//        view.updateList(model.getUnsortedList())
-        Log.d("M_MainFragmentPresenterImpl", "${model.getUnsortedList()}")
+        view.updateList(model.getUnsortedList())
     }
 
     override fun onNextButtonClicked() {
         if (model.isNotEmptyList()) {
-            view.goToResultScreen()
+            if (checkDevice.isDeviceTablet()) {
+                model.resultScreenInitialize()
+            } else {
+                view.goToResultScreen()
+            }
         } else {
             view.showEmptyListMessage()
         }
@@ -46,7 +59,12 @@ class MainFragmentPresenterImpl(
         model.setTypedText(text)
     }
 
-    override fun onScreenOpened() {
-        view.updateList(model.getUnsortedList())
+    override fun onMainScreenOpened() {
+        if (checkDevice.isDeviceTablet()) {
+            model.putMainListener(mainListener)                 // it doesn't work
+            model.mainScreenInitialize()
+        } else {
+            view.updateList(model.getUnsortedList())
+        }
     }
 }

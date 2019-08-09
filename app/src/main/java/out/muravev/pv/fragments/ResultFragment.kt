@@ -16,8 +16,6 @@ class ResultFragment : Fragment(), MainContract.ResultFragment {
 
     private lateinit var resultPresenter: MainContract.ResultFragmentPresenter
     private lateinit var router: MainContract.FragmentRouter
-//    private lateinit var deviceChecker : MainContract.DeviceChecker
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.result_fragment, container, false)
@@ -26,15 +24,29 @@ class ResultFragment : Fragment(), MainContract.ResultFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        deviceChecker = DeviceCheckerImpl(activity?.application as ApplicationGlobal)
         router = FragmentRouterImpl((activity?.application as ApplicationGlobal).deviceChecker, this)
-        resultPresenter = ResultFragmentPresenterImpl((activity?.application as ApplicationGlobal).listModel, this)
+        resultPresenter = ResultFragmentPresenterImpl(
+            (activity?.application as ApplicationGlobal).listModel,
+            this,
+            (activity?.application as ApplicationGlobal).deviceChecker
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        resultPresenter.onScreenOpened()
+        resultPresenter.onResultScreenOpened() //
+        // todo onDetach
         initListeners()
     }
+
+    override fun onDetach() {
+        super.onDetach()
+        resultPresenter.clearResultPresenterListener()
+    }////////////////////
+
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        resultPresenter.clearResultPresenterListener()
+//    }
 
     private fun initListeners() {
         back_button.setOnClickListener {
