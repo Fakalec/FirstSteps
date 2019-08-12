@@ -31,6 +31,7 @@ interface MainContract {
         fun onSortButtonClicked()
         fun onReverseButtonClicked()
         fun clearResultPresenterListener()
+        fun drawKek() : ArrayList<String>
     }
 
     interface DataListener {

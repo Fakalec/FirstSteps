@@ -5,6 +5,7 @@
     <string name="next_button">Далее</string>
     <string name="sort_button">Отсортировать</string>
     <string name="reverse_button">Реверс</string>
+    <string name="original_button">Оригинал</string>
     <string name="back_button">Назад</string>
     <string name="clean_button">Очистить</string>
     <string name="delete_button">-</string>

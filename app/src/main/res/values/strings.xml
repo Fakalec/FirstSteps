@@ -5,6 +5,7 @@
     <string name="sort_button">Sort</string>
     <string name="reverse_button">Reverse</string>
     <string name="back_button">Back</string>
+    <string name="original_button">Original</string>
     <string name="clean_button">Clean</string>
     <string name="delete_button">-</string>
     <string name="edit_string">Type text</string>

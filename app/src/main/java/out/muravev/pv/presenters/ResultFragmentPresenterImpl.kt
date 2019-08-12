@@ -14,7 +14,7 @@ class ResultFragmentPresenterImpl(
 
     private val resultListener = object : MainContract.DataListener {
         override fun onScreenChanged() {
-                view.viewResultText(model.getUnsortedListResult())
+            view.viewResultText(model.getUnsortedListResult())
         }
     }
 
@@ -23,9 +23,11 @@ class ResultFragmentPresenterImpl(
             model.putResultListener(resultListener)
             model.resultScreenInitialize()
         } else {
-                view.viewResultText(model.getUnsortedListResult())
+//                view.viewResultText(model.getUnsortedListResult())
         }
     }
+
+    override fun drawKek() = model.getUnsortedList()
 
     override fun clearResultPresenterListener() {
         model.clearResultListener()

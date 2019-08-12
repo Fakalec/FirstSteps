@@ -28,6 +28,7 @@ class MainFragmentPresenterImpl(
             model.clearEnteredText()
             view.updateList(model.getUnsortedList())
             view.clearEditText()
+            model.resultScreenInitialize()
         } else {
             view.showNoTextEnteredMessage()
         }
@@ -40,9 +41,9 @@ class MainFragmentPresenterImpl(
 
     override fun onNextButtonClicked() {
         if (model.isNotEmptyList()) {
-            if (checkDevice.isDeviceTablet()) {
-                model.resultScreenInitialize()
-            } else {
+            if (!checkDevice.isDeviceTablet()) {
+//                model.resultScreenInitialize()
+//            } else {
                 view.goToResultScreen()
             }
         } else {

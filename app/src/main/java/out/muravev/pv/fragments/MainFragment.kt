@@ -55,8 +55,11 @@ class MainFragment : Fragment(), MainContract.SorterView {
             mainPresenter.onAddButtonClicked()
         }
 
-        next_button.setOnClickListener {
-            mainPresenter.onNextButtonClicked()
+        if (next_button != null) {
+            @Suppress("PLUGIN_WARNING")
+            next_button.setOnClickListener {
+                mainPresenter.onNextButtonClicked()
+            }
         }
 
         clean_button.setOnClickListener {

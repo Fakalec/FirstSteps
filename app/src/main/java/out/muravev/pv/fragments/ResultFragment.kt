@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.result_fragment.*
+import kotlinx.android.synthetic.main.result_fragment.view.*
 import out.muravev.pv.R
 import out.muravev.pv.contracts.MainContract
 import out.muravev.pv.models.ApplicationGlobal
@@ -33,7 +34,8 @@ class ResultFragment : Fragment(), MainContract.ResultFragment {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        resultPresenter.onResultScreenOpened() //
+//        resultPresenter.onResultScreenOpened() //
+        custom_view.setText(resultPresenter.drawKek())
         // todo onDetach
         initListeners()
     }
@@ -49,9 +51,10 @@ class ResultFragment : Fragment(), MainContract.ResultFragment {
 //    }
 
     private fun initListeners() {
-        back_button.setOnClickListener {
-            resultPresenter.onBackButtonClicked()
-        }
+
+//        back_button.setOnClickListener {
+//            resultPresenter.onBackButtonClicked()
+//        }
         sort_button.setOnClickListener {
             resultPresenter.onSortButtonClicked()
         }
@@ -65,6 +68,6 @@ class ResultFragment : Fragment(), MainContract.ResultFragment {
     }
 
     override fun viewResultText(resultText: String) {
-        result_text_view.text = resultText
+//        result_text_view.text = resultText
     }
 }
