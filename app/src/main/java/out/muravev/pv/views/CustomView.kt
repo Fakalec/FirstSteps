@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import out.muravev.pv.R
 
 class CustomView @JvmOverloads constructor(
     context: Context,
@@ -13,48 +14,69 @@ class CustomView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    private lateinit var texte: ArrayList<String>
+    private lateinit var drawList: List<String>
+    private val viewColumns = resources.getInteger(R.integer.call_column)
+    private val proportionScreen = resources.getInteger(R.integer.proportion)
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val circleColor = Color.BLUE
-    private val lineColor = Color.BLACK
-    private var constantSizeX = (context.resources.displayMetrics.widthPixels).toFloat()
-    private var constantSizeY = (context.resources.displayMetrics.heightPixels).toFloat()
+    private val textColor = Color.BLACK
+    private val lineColor = Color.DKGRAY
+    private var constantSizeX = 0f
+    private var constantSizeY = 0f
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        drawKek(canvas, texte)
+        drawResult(canvas, drawList)
     }
 
-    fun setText(textik: ArrayList<String>) {
-        texte = textik
+    fun setText(stringList: List<String>) {
+        drawList = stringList
+        constantSizeX = (context.resources.displayMetrics.widthPixels).toFloat()
+        constantSizeY = (context.resources.displayMetrics.heightPixels).toFloat()
+        invalidate()
     }
 
-    private fun drawKek(canvas: Canvas, texte: ArrayList<String>) {
-        paint.color = lineColor
+    private fun drawResult(canvas: Canvas, drawList: List<String>) {
+        var count = 0
         paint.style = Paint.Style.FILL
-        paint.textSize = 50f
-        paint.color = circleColor
-        paint.style = Paint.Style.FILL
+        paint.textSize = constantSizeX / proportionScreen / 8
 
-        for (i in 0..texte.lastIndex) {
-            if () {
-                constantSizeY *= 100
+        for (i in 0..drawList.lastIndex) {
+            if (count != 0 && count % viewColumns == 0) {
+                paint.color = circleColor
+                canvas.drawCircle(
+                    120 / proportionScreen + constantSizeX * count / proportionScreen,
+                    100 / proportionScreen + constantSizeY / 32,
+                    constantSizeX / proportionScreen / 10,
+                    paint
+                )
+                count = 0
+                constantSizeY += 15000 / proportionScreen
             }
-            canvas.drawCircle(50 + constantSizeX * i / 3.5f, constantSizeY / 32, constantSizeX / 35, paint)
+            paint.color = circleColor
+            canvas.drawCircle(
+                120 / proportionScreen + constantSizeX * count / proportionScreen,
+                100 / proportionScreen + constantSizeY / 32,
+                constantSizeX / proportionScreen / 10,
+                paint
+            )
+            paint.color = lineColor
             canvas.drawLine(
-                60 + constantSizeX * i / 3.5f,
-                constantSizeY / 32 + constantSizeY / 55,
-                50 + constantSizeX * i / 3.5f + constantSizeX / 3.5f,
-                constantSizeY / 32 + constantSizeY / 55,
+                130 / proportionScreen + constantSizeX * count / proportionScreen,
+                constantSizeY / 30 + 200 / proportionScreen,
+                constantSizeX * count / proportionScreen + constantSizeX / proportionScreen / 1.2f,
+                constantSizeY / 30 + 200 / proportionScreen,
                 paint
             )
+            paint.color = textColor
             canvas.drawText(
-                texte[i],
-                50 + constantSizeX * i / 3.5f + 50,
-                constantSizeY / 32 + constantSizeY / 80,
+                drawList[i],
+                300 / proportionScreen + constantSizeX * count / proportionScreen,
+                125 / proportionScreen + constantSizeY / 32,
                 paint
             )
+            count++
         }
     }
 }

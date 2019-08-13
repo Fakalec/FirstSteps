@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import out.muravev.pv.R
 import out.muravev.pv.fragments.MainFragment
 import out.muravev.pv.fragments.ResultFragment
-import out.muravev.pv.routers.DeviceChecker
+import out.muravev.pv.utils.DeviceCheckerUtil
 
 
 class MainActivity : AppCompatActivity() {
 
-    private val checkDevice = DeviceChecker(this)
+    private val checkDevice = DeviceCheckerUtil(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

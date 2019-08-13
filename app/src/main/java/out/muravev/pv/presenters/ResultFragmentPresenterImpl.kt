@@ -2,50 +2,46 @@ package out.muravev.pv.presenters
 
 import out.muravev.pv.contracts.MainContract
 import out.muravev.pv.models.MainModelImpl
-import out.muravev.pv.routers.DeviceChecker
+import out.muravev.pv.utils.DeviceCheckerUtil
 
 class ResultFragmentPresenterImpl(
 
     private val model: MainModelImpl,
     private val view: MainContract.ResultFragment,
-    private val checkDevice: DeviceChecker
+    private val checkDeviceUtil: DeviceCheckerUtil
 ) :
     MainContract.ResultFragmentPresenter {
 
     private val resultListener = object : MainContract.DataListener {
         override fun onScreenChanged() {
-            view.viewResultText(model.getUnsortedListResult())
+            view.onResultScreenDraw(model.getSortedList())
         }
     }
 
     override fun onResultScreenOpened() {
-        if (checkDevice.isDeviceTablet()) {
+        if (checkDeviceUtil.isDeviceTablet()) {
             model.putResultListener(resultListener)
             model.resultScreenInitialize()
         } else {
-//                view.viewResultText(model.getUnsortedListResult())
+            view.onResultScreenDraw(model.getUnsortedList())
         }
     }
 
-    override fun drawKek() = model.getUnsortedList()
-
-    override fun clearResultPresenterListener() {
+    override fun cleanResultPresenterListener() {
         model.clearResultListener()
-    }
-
-    override fun onBackButtonClicked() {
-        if (!checkDevice.isDeviceTablet()) {
-            view.backToMainFragment()
-        }
     }
 
     override fun onSortButtonClicked() {
         model.sortList()
-        view.viewResultText(model.getSortedListResult())
+        view.onResultScreenDraw(model.getSortedList())
+    }
+
+    override fun onOriginalButtonClicked() {
+        view.onResultScreenDraw(model.getUnsortedList())
     }
 
     override fun onReverseButtonClicked() {
         model.reverseList()
-        view.viewResultText(model.getSortedListResult())
+        view.onResultScreenDraw(model.getSortedList())
     }
 }

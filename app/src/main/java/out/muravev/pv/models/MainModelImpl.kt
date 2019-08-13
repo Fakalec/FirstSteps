@@ -7,8 +7,8 @@ class MainModelImpl(private val listSort: ListSort) {
 
     private var resultScreenListener: MainContract.DataListener? = null
     private var mainScreenListener: MainContract.DataListener? = null
-    private var savedSortedList: ArrayList<String> = arrayListOf()    // need to private? // todo
-    private var savedString: String = ""                        // need to private?
+    private var savedSortedList: ArrayList<String> = arrayListOf()
+    private var savedString: String = ""
     private var savedUnsortedList: ArrayList<String> = arrayListOf()
 
     fun putResultListener(listenerCheck: MainContract.DataListener) {
@@ -54,6 +54,10 @@ class MainModelImpl(private val listSort: ListSort) {
         savedString = ""
     }
 
+    fun changeableListUpdate() {
+        savedSortedList = savedUnsortedList
+    }
+
     fun getUnsortedList() =
         savedUnsortedList
 
@@ -72,12 +76,6 @@ class MainModelImpl(private val listSort: ListSort) {
         val sortedList: List<String> = listSort.getMergingBranchedLists(savedUnsortedList).reversed()
         savedSortedList = ArrayList(sortedList)
     }
-
-    fun getSortedListResult() =
-        savedSortedList.toString()
-
-    fun getUnsortedListResult() =
-        savedUnsortedList.toString()
 
     fun clearLists() {
         savedSortedList.clear()

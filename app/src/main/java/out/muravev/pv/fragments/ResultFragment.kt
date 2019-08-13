@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.result_fragment.*
-import kotlinx.android.synthetic.main.result_fragment.view.*
 import out.muravev.pv.R
 import out.muravev.pv.contracts.MainContract
 import out.muravev.pv.models.ApplicationGlobal
@@ -25,7 +24,7 @@ class ResultFragment : Fragment(), MainContract.ResultFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        router = FragmentRouterImpl((activity?.application as ApplicationGlobal).deviceChecker, this)
+        router = FragmentRouterImpl(this)
         resultPresenter = ResultFragmentPresenterImpl(
             (activity?.application as ApplicationGlobal).listModel,
             this,
@@ -34,40 +33,33 @@ class ResultFragment : Fragment(), MainContract.ResultFragment {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        resultPresenter.onResultScreenOpened() //
-        custom_view.setText(resultPresenter.drawKek())
-        // todo onDetach
+        resultPresenter.onResultScreenOpened()
         initListeners()
+    }
+
+    override fun onResultScreenDraw(stringsList: List<String>) {
+        custom_view.setText(stringsList)
     }
 
     override fun onDetach() {
         super.onDetach()
-        resultPresenter.clearResultPresenterListener()
-    }////////////////////
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        resultPresenter.clearResultPresenterListener()
-//    }
+        resultPresenter.cleanResultPresenterListener()
+    }
 
     private fun initListeners() {
 
-//        back_button.setOnClickListener {
-//            resultPresenter.onBackButtonClicked()
-//        }
         sort_button.setOnClickListener {
             resultPresenter.onSortButtonClicked()
         }
         reverse_button.setOnClickListener {
             resultPresenter.onReverseButtonClicked()
         }
+        original_button.setOnClickListener {
+            resultPresenter.onOriginalButtonClicked()
+        }
     }
 
     override fun backToMainFragment() {
         router.openMainScreen()
-    }
-
-    override fun viewResultText(resultText: String) {
-//        result_text_view.text = resultText
     }
 }

@@ -1,9 +1,9 @@
-package out.muravev.pv.routers
+package out.muravev.pv.utils
 
 import android.content.Context
 import android.content.res.Configuration
 
-class DeviceChecker(private val context: Context) {
+class DeviceCheckerUtil(private val context: Context) {
 
     fun isDeviceTablet() =
         context.resources.configuration.screenLayout and

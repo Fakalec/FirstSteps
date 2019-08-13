@@ -2,13 +2,13 @@ package out.muravev.pv.presenters
 
 import out.muravev.pv.contracts.MainContract
 import out.muravev.pv.models.MainModelImpl
-import out.muravev.pv.routers.DeviceChecker
+import out.muravev.pv.utils.DeviceCheckerUtil
 
 class MainFragmentPresenterImpl(
 
     private val model: MainModelImpl,
     private val view: MainContract.SorterView,
-    private val checkDevice: DeviceChecker
+    private val checkDeviceUtil: DeviceCheckerUtil
 ) :
     MainContract.MainFragmentPresenter, MainContract.HolderPresenter {
 
@@ -18,7 +18,7 @@ class MainFragmentPresenterImpl(
         }
     }
 
-    override fun clearMainPresenterListener() {
+    override fun cleanMainPresenterListener() {
         model.clearMainListener()
     }
 
@@ -28,6 +28,7 @@ class MainFragmentPresenterImpl(
             model.clearEnteredText()
             view.updateList(model.getUnsortedList())
             view.clearEditText()
+            model.changeableListUpdate()
             model.resultScreenInitialize()
         } else {
             view.showNoTextEnteredMessage()
@@ -37,15 +38,13 @@ class MainFragmentPresenterImpl(
     override fun onDeleteButtonClicked(itemPosition: Int) {
         model.deleteItemOnPosition(itemPosition)
         view.updateList(model.getUnsortedList())
+        model.changeableListUpdate()
+        model.resultScreenInitialize()
     }
 
     override fun onNextButtonClicked() {
         if (model.isNotEmptyList()) {
-            if (!checkDevice.isDeviceTablet()) {
-//                model.resultScreenInitialize()
-//            } else {
-                view.goToResultScreen()
-            }
+            view.goToResultScreen()
         } else {
             view.showEmptyListMessage()
         }
@@ -54,6 +53,7 @@ class MainFragmentPresenterImpl(
     override fun onCleanButtonClicked() {
         model.clearLists()
         view.clearList()
+        model.resultScreenInitialize()
     }
 
     override fun onTextEdited(text: String) {
@@ -61,8 +61,8 @@ class MainFragmentPresenterImpl(
     }
 
     override fun onMainScreenOpened() {
-        if (checkDevice.isDeviceTablet()) {
-            model.putMainListener(mainListener)                 // it doesn't work
+        if (checkDeviceUtil.isDeviceTablet()) {
+            model.putMainListener(mainListener)
             model.mainScreenInitialize()
         } else {
             view.updateList(model.getUnsortedList())

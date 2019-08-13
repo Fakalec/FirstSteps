@@ -15,7 +15,7 @@ import out.muravev.pv.contracts.MainContract
 import out.muravev.pv.models.ApplicationGlobal
 import out.muravev.pv.presenters.MainFragmentPresenterImpl
 import out.muravev.pv.routers.FragmentRouterImpl
-import out.muravev.pv.toasts.ToastUtils
+import out.muravev.pv.utils.ToastUtils
 
 class MainFragment : Fragment(), MainContract.SorterView {
 
@@ -30,7 +30,7 @@ class MainFragment : Fragment(), MainContract.SorterView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        router = FragmentRouterImpl((activity?.application as ApplicationGlobal).deviceChecker, this)
+        router = FragmentRouterImpl(this)
         mainPresenter = MainFragmentPresenterImpl(
             (activity?.application as ApplicationGlobal).listModel,
             this,
@@ -46,8 +46,8 @@ class MainFragment : Fragment(), MainContract.SorterView {
 
     override fun onDetach() {
         super.onDetach()
-        mainPresenter.clearMainPresenterListener()
-    }////////////////
+        mainPresenter.cleanMainPresenterListener()
+    }
 
     private fun initListeners() {
 

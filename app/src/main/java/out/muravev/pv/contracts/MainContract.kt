@@ -17,21 +17,20 @@ interface MainContract {
         fun onTextEdited(text: String)
         fun onMainScreenOpened()
         fun onCleanButtonClicked()
-        fun clearMainPresenterListener()
+        fun cleanMainPresenterListener()
     }
 
     interface ResultFragment {
-        fun viewResultText(resultText: String)
         fun backToMainFragment()
+        fun onResultScreenDraw(stringsList: List<String>)
     }
 
     interface ResultFragmentPresenter {
         fun onResultScreenOpened()
-        fun onBackButtonClicked()
         fun onSortButtonClicked()
         fun onReverseButtonClicked()
-        fun clearResultPresenterListener()
-        fun drawKek() : ArrayList<String>
+        fun onOriginalButtonClicked()
+        fun cleanResultPresenterListener()
     }
 
     interface DataListener {

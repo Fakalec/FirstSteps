@@ -6,7 +6,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Test
 import out.muravev.pv.contracts.MainContract
 import out.muravev.pv.models.MainModelImpl
-import out.muravev.pv.routers.DeviceChecker
+import out.muravev.pv.utils.DeviceCheckerUtil
 
 /**
  * In this file you can see tests for SorterPresenter
@@ -25,8 +25,8 @@ class MainFragmentPresenterImplTest {
 
     private var model: MainModelImpl = mock()
     private var view: MainContract.SorterView = mock()
-    private var deviceChecker: DeviceChecker = mock()
-    private var presenter = MainFragmentPresenterImpl(model, view, deviceChecker)
+    private var deviceCheckerUtil: DeviceCheckerUtil = mock()
+    private var presenter = MainFragmentPresenterImpl(model, view, deviceCheckerUtil)
 
     @Test
     fun `onAddButtonClicked method when text has entered`() {

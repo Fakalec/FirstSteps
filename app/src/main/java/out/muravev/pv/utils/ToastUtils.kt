@@ -1,4 +1,4 @@
-package out.muravev.pv.toasts
+package out.muravev.pv.utils
 
 import android.content.Context
 import android.widget.Toast
