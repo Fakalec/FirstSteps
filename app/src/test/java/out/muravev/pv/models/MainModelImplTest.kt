@@ -8,7 +8,7 @@ package out.muravev.pv.models
 //class MainModelImplTest {
 //
 //    private var sortAlgorithm: ListSort = ListSort()
-//    private var model = MainModelImpl(sortAlgorithm)
+//    private var model = StringsModel(sortAlgorithm)
 //
 //    @Test
 //    fun `hasEnteredText method when nothing entered in the input line`() {

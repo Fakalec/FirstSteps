@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Test
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.models.MainModelImpl
+import out.muravev.pv.models.StringsModel
 import out.muravev.pv.utils.DeviceCheckerUtil
 
 /**
@@ -17,7 +17,7 @@ import out.muravev.pv.utils.DeviceCheckerUtil
 
 class ResultFragmentPresenterImplTest {
 
-    private var model: MainModelImpl = mock()
+    private var model: StringsModel = mock()
     private var fragment: MainContract.ResultFragment = mock()
     private var deviceCheckerUtil: DeviceCheckerUtil = mock()
     private var presenter = ResultFragmentPresenterImpl(model, fragment, deviceCheckerUtil)

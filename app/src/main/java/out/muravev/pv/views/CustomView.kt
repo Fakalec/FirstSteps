@@ -16,7 +16,7 @@ class CustomView @JvmOverloads constructor(
 
     private lateinit var drawList: List<String>
     private val viewColumns = resources.getInteger(R.integer.call_column)
-    private val proportionScreen = resources.getInteger(R.integer.proportion)
+    private val proportionParameter = resources.getInteger(R.integer.proportion)
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val circleColor = Color.BLUE
     private val textColor = Color.BLACK
@@ -37,43 +37,44 @@ class CustomView @JvmOverloads constructor(
         invalidate()
     }
 
+    // todo
     private fun drawResult(canvas: Canvas, drawList: List<String>) {
         var count = 0
         paint.style = Paint.Style.FILL
-        paint.textSize = constantSizeX / proportionScreen / 8
+        paint.textSize = constantSizeX / proportionParameter / 8
 
         for (i in 0..drawList.lastIndex) {
             if (count != 0 && count % viewColumns == 0) {
                 paint.color = circleColor
                 canvas.drawCircle(
-                    120 / proportionScreen + constantSizeX * count / proportionScreen,
-                    100 / proportionScreen + constantSizeY / 32,
-                    constantSizeX / proportionScreen / 10,
+                    120 / proportionParameter + constantSizeX * count / proportionParameter,
+                    100 / proportionParameter + constantSizeY / 32,
+                    constantSizeX / proportionParameter / 10,
                     paint
                 )
                 count = 0
-                constantSizeY += 15000 / proportionScreen
+                constantSizeY += 15000 / proportionParameter
             }
             paint.color = circleColor
             canvas.drawCircle(
-                120 / proportionScreen + constantSizeX * count / proportionScreen,
-                100 / proportionScreen + constantSizeY / 32,
-                constantSizeX / proportionScreen / 10,
+                120 / proportionParameter + constantSizeX * count / proportionParameter,
+                100 / proportionParameter + constantSizeY / 32,
+                constantSizeX / proportionParameter / 10,
                 paint
             )
             paint.color = lineColor
             canvas.drawLine(
-                130 / proportionScreen + constantSizeX * count / proportionScreen,
-                constantSizeY / 30 + 200 / proportionScreen,
-                constantSizeX * count / proportionScreen + constantSizeX / proportionScreen / 1.2f,
-                constantSizeY / 30 + 200 / proportionScreen,
+                130 / proportionParameter + constantSizeX * count / proportionParameter,
+                constantSizeY / 30 + 200 / proportionParameter,
+                constantSizeX * count / proportionParameter + constantSizeX / proportionParameter / 1.2f,
+                constantSizeY / 30 + 200 / proportionParameter,
                 paint
             )
             paint.color = textColor
             canvas.drawText(
                 drawList[i],
-                300 / proportionScreen + constantSizeX * count / proportionScreen,
-                125 / proportionScreen + constantSizeY / 32,
+                300 / proportionParameter + constantSizeX * count / proportionParameter,
+                125 / proportionParameter + constantSizeY / 32,
                 paint
             )
             count++

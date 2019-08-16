@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.main_fragment.*
 import out.muravev.pv.R
-import out.muravev.pv.adapters.RecyclerAdapter
+import out.muravev.pv.adapters.StringsRecyclerAdapter
 import out.muravev.pv.contracts.MainContract
 import out.muravev.pv.models.ApplicationGlobal
 import out.muravev.pv.presenters.MainFragmentPresenterImpl
@@ -32,7 +32,7 @@ class MainFragment : Fragment(), MainContract.SorterView {
 
         router = FragmentRouterImpl(this)
         mainPresenter = MainFragmentPresenterImpl(
-            (activity?.application as ApplicationGlobal).listModel,
+            (activity?.application as ApplicationGlobal).stringsModel,
             this,
             (activity?.application as ApplicationGlobal).deviceChecker
         )
@@ -77,7 +77,7 @@ class MainFragment : Fragment(), MainContract.SorterView {
     }
 
     private fun adapterChange(updateList: List<String>) {
-        recycler.adapter = RecyclerAdapter(updateList, mainPresenter)
+        recycler.adapter = StringsRecyclerAdapter(updateList, mainPresenter)
     }
 
     private fun toastChange(toastTextId: Int) {

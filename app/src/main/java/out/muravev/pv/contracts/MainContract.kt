@@ -33,7 +33,7 @@ interface MainContract {
         fun cleanResultPresenterListener()
     }
 
-    interface DataListener {
+    interface ScreenChangeListener {
         fun onScreenChanged()
     }
 
