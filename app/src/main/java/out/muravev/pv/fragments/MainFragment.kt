@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.main_fragment.*
 import out.muravev.pv.R
 import out.muravev.pv.adapters.StringsRecyclerAdapter
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.models.ApplicationGlobal
+import out.muravev.pv.data.ApplicationGlobal
 import out.muravev.pv.presenters.MainFragmentPresenterImpl
 import out.muravev.pv.routers.FragmentRouterImpl
 import out.muravev.pv.utils.ToastUtils

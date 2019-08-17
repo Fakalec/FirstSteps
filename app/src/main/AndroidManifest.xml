@@ -4,7 +4,7 @@
           package="out.muravev.pv">
 
     <application
-            android:name=".models.ApplicationGlobal"
+            android:name=".data.ApplicationGlobal"
             android:allowBackup="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"

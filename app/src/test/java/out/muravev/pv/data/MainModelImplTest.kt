@@ -1,4 +1,4 @@
-package out.muravev.pv.models
+package out.muravev.pv.data
 
 /**
  * In this file you can see tests for SorterModel
@@ -7,7 +7,7 @@ package out.muravev.pv.models
 
 //class MainModelImplTest {
 //
-//    private var sortAlgorithm: ListSort = ListSort()
+//    private var sortAlgorithm: ListMergeSortAlgo = ListMergeSortAlgo()
 //    private var model = StringsModel(sortAlgorithm)
 //
 //    @Test

@@ -1,7 +1,7 @@
 package out.muravev.pv.presenters
 
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.models.StringsModel
+import out.muravev.pv.data.StringsModel
 import out.muravev.pv.utils.DeviceCheckerUtil
 
 class ResultFragmentPresenterImpl(
@@ -14,7 +14,7 @@ class ResultFragmentPresenterImpl(
 
     private val resultListener = object : MainContract.ScreenChangeListener {
         override fun onScreenChanged() {
-            view.onResultScreenDraw(model.getUnsortedList()!!)
+            view.onResultScreenDraw(model.getUnsortedList())
         }
     }
 
@@ -23,7 +23,7 @@ class ResultFragmentPresenterImpl(
             model.putResultListener(resultListener)
             model.resultScreenInitialize()
         } else {
-            view.onResultScreenDraw(model.getUnsortedList()!!)
+            view.onResultScreenDraw(model.getUnsortedList())
         }
     }
 
@@ -36,7 +36,7 @@ class ResultFragmentPresenterImpl(
     }
 
     override fun onOriginalButtonClicked() {
-        view.onResultScreenDraw(model.getUnsortedList()!!)
+        view.onResultScreenDraw(model.getUnsortedList())
     }
 
     override fun onReverseButtonClicked() {

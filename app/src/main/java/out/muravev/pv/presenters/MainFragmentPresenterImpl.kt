@@ -1,7 +1,7 @@
 package out.muravev.pv.presenters
 
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.models.StringsModel
+import out.muravev.pv.data.StringsModel
 import out.muravev.pv.utils.DeviceCheckerUtil
 
 class MainFragmentPresenterImpl(
@@ -14,7 +14,7 @@ class MainFragmentPresenterImpl(
 
     private var mainListener = object : MainContract.ScreenChangeListener {
         override fun onScreenChanged() {
-            view.updateList(model.getUnsortedList()!!)
+            view.updateList(model.getUnsortedList())
         }
     }
 
@@ -26,7 +26,7 @@ class MainFragmentPresenterImpl(
         if (model.hasEnteredText()) {
             model.addNewItem()
             model.clearEnteredText()
-            view.updateList(model.getUnsortedList()!!)
+            view.updateList(model.getUnsortedList())
             view.clearEditText()
             model.resultScreenInitialize()
         } else {
@@ -35,13 +35,14 @@ class MainFragmentPresenterImpl(
     }
 
     override fun onDeleteButtonClicked(itemPosition: Int) {
-//        model.deleteItemOnPosition(itemPosition)
-        view.updateList(model.getUnsortedList()!!)
+        model.deleteItemOnPosition(itemPosition)
+//        model.updateAfterDelete()
+        view.updateList(model.getUnsortedList())
         model.resultScreenInitialize()
     }
 
     override fun onNextButtonClicked() {
-        if (model.isNotEmptyList()!!) {
+        if (model.isNotEmptyList()) {
             view.goToResultScreen()
         } else {
             view.showEmptyListMessage()
@@ -63,7 +64,7 @@ class MainFragmentPresenterImpl(
             model.putMainListener(mainListener)
             model.mainScreenInitialize()
         } else {
-            view.updateList(model.getUnsortedList()!!)
+            view.updateList(model.getUnsortedList())
         }
     }
 }

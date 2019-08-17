@@ -21,8 +21,8 @@ class StringsRecyclerAdapter(private var dataList: List<String>, private var pre
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         holder.stringsView.text = dataList[position]
-//        holder.deleteButton.setOnClickListener {
-//            presenter.onDeleteButtonClicked(position)
-//        }
+        holder.deleteButton.setOnClickListener {
+            presenter.onDeleteButtonClicked(position)
+        }
     }
 }

@@ -1,23 +1,22 @@
-package out.muravev.pv.models
+package out.muravev.pv.data
 
 import android.app.Application
 import androidx.room.Room
-import out.muravev.pv.algorithms.ListSort
 //import out.muravev.pv.databases.DataBaseHandler
 //import out.muravev.pv.databases.StringDataAccessor
-import out.muravev.pv.databases.StringDataBase
 import out.muravev.pv.utils.DeviceCheckerUtil
 
 class ApplicationGlobal : Application() {
 
-    private lateinit var db: StringDataBase
+    private lateinit var database: StringDataBase
     val deviceChecker = DeviceCheckerUtil(this)
     lateinit var stringsModel: StringsModel
 
+
     override fun onCreate() {
         super.onCreate()
-        db = Room.databaseBuilder(this, StringDataBase::class.java, "string.db").build()
-        stringsModel = StringsModel(ListSort(), db)
+        database = Room.databaseBuilder(this, StringDataBase::class.java, "string.db").fallbackToDestructiveMigration().build()
+        stringsModel = StringsModel(ListMergeSortAlgo(), database)
         stringsModel.initModel()
     }
 

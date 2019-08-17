@@ -1,7 +1,7 @@
 package out.muravev.pv
 
 import org.junit.Test
-import out.muravev.pv.algorithms.ListSort
+import out.muravev.pv.data.ListMergeSortAlgo
 
 /**
  * In this file you can see tests for ListSorter
@@ -13,11 +13,11 @@ import out.muravev.pv.algorithms.ListSort
  * 4. check non-letter characters
  */
 
-class UnitTestForListSorter {
+class UnitTestForListMergeSorterAlgo {
     @Test
     fun `checkNullString - checking for just one null string in list`() {
         val nullableList = mutableListOf("")
-        val sortedList = ListSort().getMergingBranchedLists(nullableList)
+        val sortedList = ListMergeSortAlgo().getMergingBranchedLists(nullableList)
         println(sortedList)
 
         val expected = mutableListOf("")
@@ -27,7 +27,7 @@ class UnitTestForListSorter {
     @Test
     fun `checkOdd - checking for odd string number in list`() {
         val oddNumberOfString = mutableListOf("Kotlin", "Java", "C#")
-        val sortedList = ListSort().getMergingBranchedLists(oddNumberOfString)
+        val sortedList = ListMergeSortAlgo().getMergingBranchedLists(oddNumberOfString)
         println(sortedList)
 
         val expected = mutableListOf("C#", "Java", "Kotlin")
@@ -43,7 +43,7 @@ class UnitTestForListSorter {
          * Исходя из этого сортировка строк "Assembly" и "ANSI C" происходит в порядке: "ANSI C", "Assembly".
         */
 
-        val sortedList = ListSort().getMergingBranchedLists(evenNumberOfString)
+        val sortedList = ListMergeSortAlgo().getMergingBranchedLists(evenNumberOfString)
         println(sortedList)
 
         val expected = mutableListOf("ANSI C", "Assembly", "Python", "Swift")
@@ -53,7 +53,7 @@ class UnitTestForListSorter {
     @Test
     fun `checkNonLetterString - checking for non-letter character strings in  list`() {
         val nonLetterList = mutableListOf("))(*&", "^&$#", "456", "@!#$", " ", "")
-        val sortedList = ListSort().getMergingBranchedLists(nonLetterList)
+        val sortedList = ListMergeSortAlgo().getMergingBranchedLists(nonLetterList)
         println(sortedList)
 
         val expected = mutableListOf("", " ", "))(*&", "456", "@!#$", "^&$#")

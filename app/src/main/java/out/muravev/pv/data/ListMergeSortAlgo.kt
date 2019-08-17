@@ -1,6 +1,6 @@
-package out.muravev.pv.algorithms
+package out.muravev.pv.data
 
-class ListSort {
+class ListMergeSortAlgo {
 
     // Рекурсивная функция, которая будет принимать лист строк и разделять их.
 

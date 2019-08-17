@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.result_fragment.*
 import out.muravev.pv.R
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.models.ApplicationGlobal
+import out.muravev.pv.data.ApplicationGlobal
 import out.muravev.pv.presenters.ResultFragmentPresenterImpl
 import out.muravev.pv.routers.FragmentRouterImpl
 
@@ -26,7 +26,7 @@ class ResultFragment : Fragment(), MainContract.ResultFragment {
 
         router = FragmentRouterImpl(this)
         resultPresenter = ResultFragmentPresenterImpl(
-            (activity?.application as ApplicationGlobal).listModel,
+            (activity?.application as ApplicationGlobal).stringsModel,
             this,
             (activity?.application as ApplicationGlobal).deviceChecker
         )

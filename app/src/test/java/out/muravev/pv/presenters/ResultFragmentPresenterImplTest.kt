@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Test
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.models.StringsModel
+import out.muravev.pv.data.StringsModel
 import out.muravev.pv.utils.DeviceCheckerUtil
 
 /**

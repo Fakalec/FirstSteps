@@ -1,24 +1,17 @@
-package out.muravev.pv.models
+package out.muravev.pv.data
 
-//import out.muravev.pv.databases.StringDataAccessor
-import androidx.room.Entity
-import out.muravev.pv.algorithms.ListSort
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.contracts.StringDataDao
 import out.muravev.pv.databases.DbWorkerThread
-import out.muravev.pv.databases.StringData
-import out.muravev.pv.databases.StringDataBase
-import java.util.*
+import out.muravev.pv.databases.StringsEntity
 
-@Entity
-class StringsModel(private val listSort: ListSort, val sqlData: StringDataBase?) {
+class StringsModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: StringDataBase) {
 
-    private lateinit var listStrings : StringData
+    private var listStrings = arrayListOf<String>()
     private var resultScreenListener: MainContract.ScreenChangeListener? = null
     private var mainScreenListener: MainContract.ScreenChangeListener? = null
     private var savedString: String = ""
     private val dbWorkerThread = DbWorkerThread("DbThread")
-    private val stringDao = sqlData?.stringDao()
+    private val stringDao = sqlData.stringDao()
 
     fun putResultListener(screenChangeCallback: MainContract.ScreenChangeListener) {
         resultScreenListener = screenChangeCallback
@@ -52,38 +45,54 @@ class StringsModel(private val listSort: ListSort, val sqlData: StringDataBase?)
     }
 
     fun addNewItem() {
-        listStrings.stringItem = savedString
-        stringDao?.insert(listStrings)
+        listStrings.add(savedString)
+        val stringsEntity = StringsEntity(savedString, listStrings.lastIndex)
+        val task = Runnable {
+            stringDao.insertString(stringsEntity)
+        }
+        dbWorkerThread.postTask(task)
     }
 
-//    fun deleteItemOnPosition(itemPosition: Int) {
-////        sqlData.deleteString(itemPosition)
-//    }
+    fun deleteItemOnPosition(itemPosition: Int) {
+        listStrings.removeAt(itemPosition)
+        val task = Runnable {
+            stringDao.deleteOnPosition(itemPosition)
+        }
+        dbWorkerThread.postTask(task)
+    }
 
     fun clearEnteredText() {
         savedString = ""
     }
 
     fun getUnsortedList() =
-        stringDao?.getAllList()
+        listStrings
 
     fun getSortedList() =
-        listSort.getMergingBranchedLists(stringDao!!.getAllList())
+        listMergeSortAlgo.getMergingBranchedLists(listStrings)
 
     fun isNotEmptyList() =
-        stringDao?.getAllList()?.isNotEmpty()
+        listStrings.isNotEmpty()
 
     fun getReverseSortedList() =
-        listSort.getMergingBranchedLists(stringDao!!.getAllList()).reversed()
+        listMergeSortAlgo.getMergingBranchedLists(listStrings).reversed()
 
     fun clearLists() {
-//        sqlData?.deleteAll(stringData)
+        listStrings.clear()
+        val task = Runnable {
+            stringDao.deleteAllStrings()
+        }
+        dbWorkerThread.postTask(task)
     }
+
 
     fun initModel() {
         dbWorkerThread.start()
         val task = Runnable {
-            stringDao?.getAllList()
+            val list = stringDao.getAllStrings()
+            for (i in 0..list.lastIndex) {
+                listStrings.add(list[i].name)
+            }
         }
         dbWorkerThread.postTask(task)
     }

@@ -24,6 +24,7 @@ class CustomView @JvmOverloads constructor(
     private var constantSizeX = 0f
     private var constantSizeY = 0f
 
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
