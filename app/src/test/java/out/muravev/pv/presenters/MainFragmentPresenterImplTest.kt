@@ -5,7 +5,7 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Test
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.data.StringsModel
+import out.muravev.pv.data.TextItemModel
 import out.muravev.pv.utils.DeviceCheckerUtil
 
 /**
@@ -23,7 +23,7 @@ import out.muravev.pv.utils.DeviceCheckerUtil
 
 class MainFragmentPresenterImplTest {
 
-    private var model: StringsModel = mock()
+    private var model: TextItemModel = mock()
     private var view: MainContract.SorterView = mock()
     private var deviceCheckerUtil: DeviceCheckerUtil = mock()
     private var presenter = MainFragmentPresenterImpl(model, view, deviceCheckerUtil)

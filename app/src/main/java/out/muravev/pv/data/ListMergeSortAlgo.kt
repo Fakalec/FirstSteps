@@ -4,14 +4,14 @@ class ListMergeSortAlgo {
 
     // Рекурсивная функция, которая будет принимать лист строк и разделять их.
 
-    fun getMergingBranchedLists(listOfString: List<StringItems>): List<StringItems> {
+    fun getMergingBranchedLists(listOfTextDate: List<TextDateItems>): List<TextDateItems> {
 
-        if (listOfString.size <= 1) // якорь рекурсии
-            return listOfString
+        if (listOfTextDate.size <= 1) // якорь рекурсии
+            return listOfTextDate
 
-        val middleStringIndex = listOfString.size / 2
-        val smallerValueList = listOfString.subList(0, middleStringIndex) // создание левого подлиста (меньшие значения)
-        val biggerValueList = listOfString.subList(middleStringIndex, listOfString.size) // правый подлист (бОльшие)
+        val middleStringIndex = listOfTextDate.size / 2
+        val smallerValueList = listOfTextDate.subList(0, middleStringIndex) // создание левого подлиста (меньшие значения)
+        val biggerValueList = listOfTextDate.subList(middleStringIndex, listOfTextDate.size) // правый подлист (бОльшие)
 
         return sortListValues(getMergingBranchedLists(smallerValueList), getMergingBranchedLists(biggerValueList))
     }
@@ -19,18 +19,18 @@ class ListMergeSortAlgo {
     // Функция сортировки принимает подлисты малых и бОльших значений и сортирует их (меньшие в начало, бОльшие в конец)
 
     private fun sortListValues(
-        smallerValueList: List<StringItems>,
-        biggerValueList: List<StringItems>
-    ): List<StringItems> {
+        smallerValueList: List<TextDateItems>,
+        biggerValueList: List<TextDateItems>
+    ): List<TextDateItems> {
 
         var leftHandIndex = 0
         var rightHandIndex = 0
-        val resultSortedList: MutableList<StringItems> = mutableListOf()
+        val resultSortedList: MutableList<TextDateItems> = mutableListOf()
 
         while (leftHandIndex < smallerValueList.count() && rightHandIndex < biggerValueList.count()) {
             if (smallerValueList[leftHandIndex].name <= biggerValueList[rightHandIndex].name) {
                 resultSortedList.add(
-                    StringItems(
+                    TextDateItems(
                         smallerValueList[leftHandIndex].name,
                         smallerValueList[leftHandIndex].creationDate
                     )
@@ -38,7 +38,7 @@ class ListMergeSortAlgo {
                 leftHandIndex++
             } else {
                 resultSortedList.add(
-                    StringItems(
+                    TextDateItems(
                         biggerValueList[rightHandIndex].name,
                         biggerValueList[rightHandIndex].creationDate
                     )
@@ -49,7 +49,7 @@ class ListMergeSortAlgo {
 
         while (leftHandIndex < smallerValueList.size) {
             resultSortedList.add(
-                StringItems(
+                TextDateItems(
                     smallerValueList[leftHandIndex].name,
                     smallerValueList[leftHandIndex].creationDate
                 )
@@ -59,7 +59,7 @@ class ListMergeSortAlgo {
 
         while (rightHandIndex < biggerValueList.size) {
             resultSortedList.add(
-                StringItems(
+                TextDateItems(
                     biggerValueList[rightHandIndex].name,
                     biggerValueList[rightHandIndex].creationDate
                 )

@@ -3,8 +3,10 @@ package out.muravev.pv.databases
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-val MIGRATION_4_5 = object : Migration(4, 5) {
+val MIGRATION_6_7 = object : Migration(7, 8) {
     override fun migrate(database: SupportSQLiteDatabase) {
+        // todo
+//        database.execSQL("CREATE TABLE `string_table` (`name` TEXT NOT NULL, `date` INTEGER NOT NULL, `id` INTEGER NOT NULL, PRIMARY KEY(`id`))")
     }
 }
 

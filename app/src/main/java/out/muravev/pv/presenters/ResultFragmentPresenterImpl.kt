@@ -1,12 +1,12 @@
 package out.muravev.pv.presenters
 
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.data.StringsModel
+import out.muravev.pv.data.TextItemModel
 import out.muravev.pv.utils.DeviceCheckerUtil
 
 class ResultFragmentPresenterImpl(
 
-    private val model: StringsModel,
+    private val model: TextItemModel,
     private val view: MainContract.ResultFragment,
     private val checkDeviceUtil: DeviceCheckerUtil
 ) :

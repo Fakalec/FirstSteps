@@ -7,7 +7,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import out.muravev.pv.R
-import out.muravev.pv.data.StringItems
+import out.muravev.pv.data.TextDateItems
 
 class CustomView @JvmOverloads constructor(
     context: Context,
@@ -15,7 +15,7 @@ class CustomView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    private lateinit var drawList: List<StringItems>
+    private lateinit var drawList: List<TextDateItems>
     private val viewColumns = resources.getInteger(R.integer.call_column)
     private val proportionParameter = resources.getInteger(R.integer.proportion)
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -31,14 +31,14 @@ class CustomView @JvmOverloads constructor(
         drawResult(canvas, drawList)
     }
 
-    fun setText(stringList: List<StringItems>) {
-        drawList = stringList
+    fun setText(textDateList: List<TextDateItems>) {
+        drawList = textDateList
         constantSizeX = (context.resources.displayMetrics.widthPixels).toFloat()
         constantSizeY = (context.resources.displayMetrics.heightPixels).toFloat()
         invalidate()
     }
 
-    private fun drawResult(canvas: Canvas, drawList: List<StringItems>) {
+    private fun drawResult(canvas: Canvas, drawList: List<TextDateItems>) {
         var count = 0
         paint.style = Paint.Style.FILL
         for (i in 0..drawList.lastIndex) {
@@ -89,7 +89,7 @@ class CustomView @JvmOverloads constructor(
         )
     }
 
-    private fun drawText(canvas: Canvas, drawList: List<StringItems>, position: Int, count: Int) {
+    private fun drawText(canvas: Canvas, drawList: List<TextDateItems>, position: Int, count: Int) {
         paint.color = textColor
         paint.textSize = constantSizeX / proportionParameter / resources.getInteger(R.integer.date_size_divider)
         canvas.drawText(

@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import out.muravev.pv.R
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.data.StringItems
+import out.muravev.pv.data.TextDateItems
 
 class StringsRecyclerAdapter(
-    private var dataList: List<StringItems>,
+    private var dataList: List<TextDateItems>,
     private var presenter: MainContract.HolderPresenter
 ) :
     RecyclerView.Adapter<RecyclerViewHolder>() {

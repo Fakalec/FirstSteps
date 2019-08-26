@@ -1,14 +1,14 @@
 package out.muravev.pv.data
 
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.databases.StringDatabase
-import out.muravev.pv.databases.StringsEntity
+import out.muravev.pv.databases.TextItemDatabase
+import out.muravev.pv.databases.TextItemEntity
 import out.muravev.pv.threads.DbWorkerThread
 import java.util.*
 
-class StringsModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: StringDatabase) {
+class TextItemModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: TextItemDatabase) {
 
-    private var listStrings = arrayListOf<StringItems>()
+    private var listStrings = arrayListOf<TextDateItems>()
     private var resultScreenListener: MainContract.ScreenChangeListener? = null
     private var mainScreenListener: MainContract.ScreenChangeListener? = null
     private var savedString: String = ""
@@ -47,11 +47,11 @@ class StringsModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: St
     }
 
     fun addNewItem() {
-        listStrings.add(StringItems(savedString, Date()))
-        val stringsEntity = StringsEntity(
+        listStrings.add(TextDateItems(savedString, Date()))
+        val stringsEntity = TextItemEntity(
             listStrings[listStrings.lastIndex].creationDate,
-            listStrings[listStrings.lastIndex].name,
-            listStrings.lastIndex
+            listStrings[listStrings.lastIndex].name
+//            listStrings.lastIndex
         )
         val task = Runnable {
             stringDao.insertString(stringsEntity)
@@ -74,13 +74,13 @@ class StringsModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: St
     fun getUnsortedList() =
         listStrings
 
-    fun getSortedList(): List<StringItems> =
+    fun getSortedList(): List<TextDateItems> =
         listMergeSortAlgo.getMergingBranchedLists(listStrings)
 
     fun isNotEmptyList() =
         listStrings.isNotEmpty()
 
-    fun getReverseSortedList(): List<StringItems> =
+    fun getReverseSortedList(): List<TextDateItems> =
         listMergeSortAlgo.getMergingBranchedLists(listStrings).reversed()
 
     fun clearLists() {
@@ -96,7 +96,7 @@ class StringsModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: St
         val task = Runnable {
             val list = stringDao.getAllStrings()
             for (i in 0..list.lastIndex) {
-                listStrings.add(StringItems(list[i].name, list[i].date))
+                listStrings.add(TextDateItems(list[i].name, list[i].date))
             }
         }
         dbWorkerThread.postTask(task)

@@ -5,9 +5,9 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import out.muravev.pv.data.DateConverter
 
-@Database(entities = [StringsEntity::class], version = 5, exportSchema = false)
+@Database(entities = [TextItemEntity::class], version = 9, exportSchema = false)
 @TypeConverters(DateConverter::class)
-abstract class StringDatabase : RoomDatabase() {
+abstract class TextItemDatabase : RoomDatabase() {
 
-    abstract fun stringDao(): StringDataDao
+    abstract fun stringDao(): TextItemDao
 }

@@ -13,7 +13,7 @@ import out.muravev.pv.R
 import out.muravev.pv.adapters.StringsRecyclerAdapter
 import out.muravev.pv.contracts.MainContract
 import out.muravev.pv.data.ApplicationGlobal
-import out.muravev.pv.data.StringItems
+import out.muravev.pv.data.TextDateItems
 import out.muravev.pv.presenters.MainFragmentPresenterImpl
 import out.muravev.pv.routers.FragmentRouterImpl
 import out.muravev.pv.utils.ToastUtils
@@ -33,7 +33,7 @@ class MainFragment : Fragment(), MainContract.SorterView {
 
         router = FragmentRouterImpl(this)
         mainPresenter = MainFragmentPresenterImpl(
-            (activity?.application as ApplicationGlobal).stringsModel,
+            (activity?.application as ApplicationGlobal).textItemModel,
             this,
             (activity?.application as ApplicationGlobal).deviceChecker
         )
@@ -77,7 +77,7 @@ class MainFragment : Fragment(), MainContract.SorterView {
         })
     }
 
-    private fun adapterChange(updateList: List<StringItems>) {
+    private fun adapterChange(updateList: List<TextDateItems>) {
         recycler.adapter = StringsRecyclerAdapter(updateList, mainPresenter)
     }
 
@@ -97,7 +97,7 @@ class MainFragment : Fragment(), MainContract.SorterView {
         toastChange(R.string.empty_edit_toast)
     }
 
-    override fun updateList(updateList: List<StringItems>) {
+    override fun updateList(updateList: List<TextDateItems>) {
         adapterChange(updateList)
     }
 

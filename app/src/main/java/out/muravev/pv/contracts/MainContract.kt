@@ -1,11 +1,11 @@
 package out.muravev.pv.contracts
 
-import out.muravev.pv.data.StringItems
+import out.muravev.pv.data.TextDateItems
 
 interface MainContract {
 
     interface SorterView {
-        fun updateList(updateList: List<StringItems>)
+        fun updateList(updateList: List<TextDateItems>)
         fun clearList()
         fun goToResultScreen()
         fun showEmptyListMessage()
@@ -24,7 +24,7 @@ interface MainContract {
 
     interface ResultFragment {
         fun backToMainFragment()
-        fun onResultScreenDraw(stringsList: List<StringItems>)
+        fun onResultScreenDraw(stringsList: List<TextDateItems>)
     }
 
     interface ResultFragmentPresenter {
