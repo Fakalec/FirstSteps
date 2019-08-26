@@ -1,20 +1,21 @@
 package out.muravev.pv.databases
 
-import androidx.room.*
-import out.muravev.pv.databases.StringsEntity
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
 
 @Dao
 interface StringDataDao {
 
-    @Query("SELECT * FROM strings_table")
+    @Query("SELECT * FROM strin_date")
     fun getAllStrings(): List<StringsEntity>
 
-    @Query("DELETE FROM strings_table WHERE id == :position")
+    @Query("DELETE FROM strin_date WHERE id == :position")
     fun deleteOnPosition(position: Int)
 
     @Insert
     fun insertString(stringData: StringsEntity)
 
-    @Query("DELETE FROM strings_table")
+    @Query("DELETE FROM strin_date")
     fun deleteAllStrings()
 }

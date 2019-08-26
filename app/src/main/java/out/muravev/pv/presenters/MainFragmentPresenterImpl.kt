@@ -36,7 +36,6 @@ class MainFragmentPresenterImpl(
 
     override fun onDeleteButtonClicked(itemPosition: Int) {
         model.deleteItemOnPosition(itemPosition)
-//        model.updateAfterDelete()
         view.updateList(model.getUnsortedList())
         model.resultScreenInitialize()
     }

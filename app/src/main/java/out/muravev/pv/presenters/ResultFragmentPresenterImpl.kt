@@ -33,13 +33,16 @@ class ResultFragmentPresenterImpl(
 
     override fun onSortButtonClicked() {
         view.onResultScreenDraw(model.getSortedList())
+
     }
 
     override fun onOriginalButtonClicked() {
         view.onResultScreenDraw(model.getUnsortedList())
+
     }
 
     override fun onReverseButtonClicked() {
         view.onResultScreenDraw(model.getReverseSortedList())
+
     }
 }

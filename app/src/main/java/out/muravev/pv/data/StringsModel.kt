@@ -1,12 +1,14 @@
 package out.muravev.pv.data
 
 import out.muravev.pv.contracts.MainContract
-import out.muravev.pv.databases.DbWorkerThread
+import out.muravev.pv.databases.StringDatabase
 import out.muravev.pv.databases.StringsEntity
+import out.muravev.pv.threads.DbWorkerThread
+import java.util.*
 
-class StringsModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: StringDataBase) {
+class StringsModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: StringDatabase) {
 
-    private var listStrings = arrayListOf<String>()
+    private var listStrings = arrayListOf<StringItems>()
     private var resultScreenListener: MainContract.ScreenChangeListener? = null
     private var mainScreenListener: MainContract.ScreenChangeListener? = null
     private var savedString: String = ""
@@ -45,8 +47,12 @@ class StringsModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: St
     }
 
     fun addNewItem() {
-        listStrings.add(savedString)
-        val stringsEntity = StringsEntity(savedString, listStrings.lastIndex)
+        listStrings.add(StringItems(savedString, Date()))
+        val stringsEntity = StringsEntity(
+            listStrings[listStrings.lastIndex].creationDate,
+            listStrings[listStrings.lastIndex].name,
+            listStrings.lastIndex
+        )
         val task = Runnable {
             stringDao.insertString(stringsEntity)
         }
@@ -68,13 +74,13 @@ class StringsModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: St
     fun getUnsortedList() =
         listStrings
 
-    fun getSortedList() =
+    fun getSortedList(): List<StringItems> =
         listMergeSortAlgo.getMergingBranchedLists(listStrings)
 
     fun isNotEmptyList() =
         listStrings.isNotEmpty()
 
-    fun getReverseSortedList() =
+    fun getReverseSortedList(): List<StringItems> =
         listMergeSortAlgo.getMergingBranchedLists(listStrings).reversed()
 
     fun clearLists() {
@@ -85,13 +91,12 @@ class StringsModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: St
         dbWorkerThread.postTask(task)
     }
 
-
     fun initModel() {
         dbWorkerThread.start()
         val task = Runnable {
             val list = stringDao.getAllStrings()
             for (i in 0..list.lastIndex) {
-                listStrings.add(list[i].name)
+                listStrings.add(StringItems(list[i].name, list[i].date))
             }
         }
         dbWorkerThread.postTask(task)

@@ -4,7 +4,7 @@ class ListMergeSortAlgo {
 
     // Рекурсивная функция, которая будет принимать лист строк и разделять их.
 
-    fun getMergingBranchedLists(listOfString: List<String>): List<String> {
+    fun getMergingBranchedLists(listOfString: List<StringItems>): List<StringItems> {
 
         if (listOfString.size <= 1) // якорь рекурсии
             return listOfString
@@ -18,29 +18,52 @@ class ListMergeSortAlgo {
 
     // Функция сортировки принимает подлисты малых и бОльших значений и сортирует их (меньшие в начало, бОльшие в конец)
 
-    private fun sortListValues(smallerValueList: List<String>, biggerValueList: List<String>): List<String> {
+    private fun sortListValues(
+        smallerValueList: List<StringItems>,
+        biggerValueList: List<StringItems>
+    ): List<StringItems> {
 
         var leftHandIndex = 0
         var rightHandIndex = 0
-        val resultSortedList: MutableList<String> = mutableListOf()
+        val resultSortedList: MutableList<StringItems> = mutableListOf()
 
         while (leftHandIndex < smallerValueList.count() && rightHandIndex < biggerValueList.count()) {
-            if (smallerValueList[leftHandIndex] <= biggerValueList[rightHandIndex]) {
-                resultSortedList.add(smallerValueList[leftHandIndex])
+            if (smallerValueList[leftHandIndex].name <= biggerValueList[rightHandIndex].name) {
+                resultSortedList.add(
+                    StringItems(
+                        smallerValueList[leftHandIndex].name,
+                        smallerValueList[leftHandIndex].creationDate
+                    )
+                )
                 leftHandIndex++
             } else {
-                resultSortedList.add(biggerValueList[rightHandIndex])
+                resultSortedList.add(
+                    StringItems(
+                        biggerValueList[rightHandIndex].name,
+                        biggerValueList[rightHandIndex].creationDate
+                    )
+                )
                 rightHandIndex++
             }
         }
 
         while (leftHandIndex < smallerValueList.size) {
-            resultSortedList.add(smallerValueList[leftHandIndex])
+            resultSortedList.add(
+                StringItems(
+                    smallerValueList[leftHandIndex].name,
+                    smallerValueList[leftHandIndex].creationDate
+                )
+            )
             leftHandIndex++
         }
 
         while (rightHandIndex < biggerValueList.size) {
-            resultSortedList.add(biggerValueList[rightHandIndex])
+            resultSortedList.add(
+                StringItems(
+                    biggerValueList[rightHandIndex].name,
+                    biggerValueList[rightHandIndex].creationDate
+                )
+            )
             rightHandIndex++
         }
 

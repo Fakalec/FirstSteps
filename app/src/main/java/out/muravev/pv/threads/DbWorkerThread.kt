@@ -1,9 +1,9 @@
-package out.muravev.pv.databases
+package out.muravev.pv.threads
 
 import android.os.Handler
 import android.os.HandlerThread
 
-class DbWorkerThread(threadName: String): HandlerThread(threadName) {
+class DbWorkerThread(threadName: String) : HandlerThread(threadName) {
 
     private lateinit var mWorkerHandler: Handler
 

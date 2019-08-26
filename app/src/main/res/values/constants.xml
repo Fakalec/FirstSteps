@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="circle_x_divident">120</integer>
+    <integer name="circle_y_divident">100</integer>
+    <integer name="circle_y_divider">32</integer>
+    <integer name="circle_radius_divider">10</integer>
+    <integer name="btw_lines_y_distance">15000</integer>
+    <integer name="line_x_divident">130</integer>
+    <integer name="date_x_divident">130</integer>
+    <integer name="date_size_divider">13</integer>
+    <integer name="string_size_divider">8</integer>
+    <integer name="text_y_divider">32</integer>
+    <integer name="date_y_divident">350</integer>
+    <integer name="string_y_divident">125</integer>
+    <integer name="string_x_divident">300</integer>
+    <integer name="line_y_divider">30</integer>
+    <integer name="line_y_divident">200</integer>
+
+</resources>

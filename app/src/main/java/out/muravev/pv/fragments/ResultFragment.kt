@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.result_fragment.*
 import out.muravev.pv.R
 import out.muravev.pv.contracts.MainContract
 import out.muravev.pv.data.ApplicationGlobal
+import out.muravev.pv.data.StringItems
 import out.muravev.pv.presenters.ResultFragmentPresenterImpl
 import out.muravev.pv.routers.FragmentRouterImpl
 
@@ -37,7 +38,7 @@ class ResultFragment : Fragment(), MainContract.ResultFragment {
         initListeners()
     }
 
-    override fun onResultScreenDraw(stringsList: List<String>) {
+    override fun onResultScreenDraw(stringsList: List<StringItems>) {
         custom_view.setText(stringsList)
     }
 

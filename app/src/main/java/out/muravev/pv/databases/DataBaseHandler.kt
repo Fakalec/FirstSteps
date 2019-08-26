@@ -1,4 +1,5 @@
 package out.muravev.pv.databases
+
 //
 //import android.content.ContentValues
 //import android.content.Context
@@ -14,7 +15,7 @@ package out.muravev.pv.databases
 //        const val NEW_STRING = "StringItem"
 //        const val ID = "id"
 //
-//        // creationDate Date todo
+//        // creationDate Date
 //        private const val CREATE_STRING_TABLE =
 //            ("CREATE TABLE $TABLE_NAME ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $NEW_STRING TEXT)")
 //        private const val DROP_STRING_TABLE = "DROP TABLE IF EXISTS $TABLE_NAME"
