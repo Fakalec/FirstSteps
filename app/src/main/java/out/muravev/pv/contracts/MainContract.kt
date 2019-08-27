@@ -13,7 +13,7 @@ interface MainContract {
         fun clearEditText()
     }
 
-    interface MainFragmentPresenter : HolderPresenter {
+    interface MainPresenter : HolderPresenter {
         fun onNextButtonClicked()
         fun onAddButtonClicked()
         fun onTextEdited(text: String)
@@ -27,7 +27,7 @@ interface MainContract {
         fun onResultScreenDraw(stringsList: List<TextDateItems>)
     }
 
-    interface ResultFragmentPresenter {
+    interface ResultPresenter {
         fun onResultScreenOpened()
         fun onSortButtonClicked()
         fun onReverseButtonClicked()
@@ -40,7 +40,7 @@ interface MainContract {
     }
 
     interface HolderPresenter {
-        fun onDeleteButtonClicked(itemPosition: Int)
+        fun onDeleteButtonClicked(idKey: Int)
     }
 
     interface FragmentRouter {

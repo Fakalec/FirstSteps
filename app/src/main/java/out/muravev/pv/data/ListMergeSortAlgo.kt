@@ -10,7 +10,8 @@ class ListMergeSortAlgo {
             return listOfTextDate
 
         val middleStringIndex = listOfTextDate.size / 2
-        val smallerValueList = listOfTextDate.subList(0, middleStringIndex) // создание левого подлиста (меньшие значения)
+        val smallerValueList =
+            listOfTextDate.subList(0, middleStringIndex) // создание левого подлиста (меньшие значения)
         val biggerValueList = listOfTextDate.subList(middleStringIndex, listOfTextDate.size) // правый подлист (бОльшие)
 
         return sortListValues(getMergingBranchedLists(smallerValueList), getMergingBranchedLists(biggerValueList))

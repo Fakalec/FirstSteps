@@ -10,12 +10,12 @@ import out.muravev.pv.R
 import out.muravev.pv.contracts.MainContract
 import out.muravev.pv.data.ApplicationGlobal
 import out.muravev.pv.data.TextDateItems
-import out.muravev.pv.presenters.ResultFragmentPresenterImpl
+import out.muravev.pv.presenters.ResultPresenterImpl
 import out.muravev.pv.routers.FragmentRouterImpl
 
 class ResultFragment : Fragment(), MainContract.ResultFragment {
 
-    private lateinit var resultPresenter: MainContract.ResultFragmentPresenter
+    private lateinit var resultPresenter: MainContract.ResultPresenter
     private lateinit var router: MainContract.FragmentRouter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,7 +26,7 @@ class ResultFragment : Fragment(), MainContract.ResultFragment {
         super.onCreate(savedInstanceState)
 
         router = FragmentRouterImpl(this)
-        resultPresenter = ResultFragmentPresenterImpl(
+        resultPresenter = ResultPresenterImpl(
             (activity?.application as ApplicationGlobal).textItemModel,
             this,
             (activity?.application as ApplicationGlobal).deviceChecker

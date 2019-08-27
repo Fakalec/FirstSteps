@@ -14,13 +14,13 @@ import out.muravev.pv.adapters.StringsRecyclerAdapter
 import out.muravev.pv.contracts.MainContract
 import out.muravev.pv.data.ApplicationGlobal
 import out.muravev.pv.data.TextDateItems
-import out.muravev.pv.presenters.MainFragmentPresenterImpl
+import out.muravev.pv.presenters.MainPresenterImpl
 import out.muravev.pv.routers.FragmentRouterImpl
 import out.muravev.pv.utils.ToastUtils
 
 class MainFragment : Fragment(), MainContract.MainFragment {
 
-    private lateinit var mainPresenter: MainContract.MainFragmentPresenter
+    private lateinit var mainPresenter: MainContract.MainPresenter
     private lateinit var router: MainContract.FragmentRouter
     private val toastUtil = ToastUtils()
 
@@ -32,7 +32,7 @@ class MainFragment : Fragment(), MainContract.MainFragment {
         super.onCreate(savedInstanceState)
 
         router = FragmentRouterImpl(this)
-        mainPresenter = MainFragmentPresenterImpl(
+        mainPresenter = MainPresenterImpl(
             (activity?.application as ApplicationGlobal).textItemModel,
             this,
             (activity?.application as ApplicationGlobal).deviceChecker

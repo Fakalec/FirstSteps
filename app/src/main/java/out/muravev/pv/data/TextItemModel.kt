@@ -48,19 +48,26 @@ class TextItemModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: T
     }
 
     fun addNewItem() {
+        if (listStrings.isNotEmpty()) {
+            id = listStrings[listStrings.lastIndex].id
+        }
         listStrings.add(TextDateItems(savedString, Date(), ++id))
-        val stringsEntity = TextItemEntity(Date(), savedString, id)
+        val stringsEntity = TextItemEntity(
+            listStrings[listStrings.lastIndex].creationDate,
+            listStrings[listStrings.lastIndex].name,
+            listStrings[listStrings.lastIndex].id
+        )
         val task = Runnable {
             stringDao.insertString(stringsEntity)
         }
         dbWorkerThread.postTask(task)
     }
 
-    fun deleteItemOnPosition(itemPosition: Int) {
+    fun deleteItemOnIdKey(idKey: Int) {
         for (i in 0..listStrings.lastIndex) {
-            if (itemPosition == listStrings[i].id) {
+            if (idKey == listStrings[i].id) {
                 val task = Runnable {
-                    stringDao.deleteOnPosition(listStrings[i].id)
+                    stringDao.deleteOnIdKey(listStrings[i].id)
                     listStrings.removeAt(i)
                 }
                 dbWorkerThread.postTask(task)

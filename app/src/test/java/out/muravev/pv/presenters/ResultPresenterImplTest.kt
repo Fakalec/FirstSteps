@@ -15,12 +15,12 @@ import out.muravev.pv.utils.DeviceCheckerUtil
  * 2. checking onOkButtonClicked method that clean list and return to main screen
  */
 
-class ResultFragmentPresenterImplTest {
+class ResultPresenterImplTest {
 
     private var model: TextItemModel = mock()
     private var fragment: MainContract.ResultFragment = mock()
     private var deviceCheckerUtil: DeviceCheckerUtil = mock()
-    private var presenter = ResultFragmentPresenterImpl(model, fragment, deviceCheckerUtil)
+    private var presenter = ResultPresenterImpl(model, fragment, deviceCheckerUtil)
 
     @Test
     fun `onScreenOpened method`() {
@@ -33,7 +33,7 @@ class ResultFragmentPresenterImplTest {
 
     @Test
     fun `onOkButtonClicked method`() {
-        presenter.onBackButtonClicked()
+//        presenter.onBackButtonClicked()
 
 //        verify(model).clearList()
         verify(fragment).backToMainFragment()

@@ -10,8 +10,8 @@ interface TextItemDao {
     @Query("SELECT * FROM strings")
     fun getAllStrings(): List<TextItemEntity>
 
-    @Query("DELETE FROM strings WHERE id == :position")
-    fun deleteOnPosition(position: Int)
+    @Query("DELETE FROM strings WHERE id == :idKey")
+    fun deleteOnIdKey(idKey: Int)
 
     @Insert
     fun insertString(stringData: TextItemEntity)

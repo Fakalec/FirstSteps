@@ -21,12 +21,12 @@ import out.muravev.pv.utils.DeviceCheckerUtil
  * 7. checking onTextEdited method with something text edited
  */
 
-class MainFragmentPresenterImplTest {
+class MainPresenterImplTest {
 
     private var model: TextItemModel = mock()
     private var view: MainContract.MainFragment = mock()
     private var deviceCheckerUtil: DeviceCheckerUtil = mock()
-    private var presenter = MainFragmentPresenterImpl(model, view, deviceCheckerUtil)
+    private var presenter = MainPresenterImpl(model, view, deviceCheckerUtil)
 
     @Test
     fun `onAddButtonClicked method when text has entered`() {

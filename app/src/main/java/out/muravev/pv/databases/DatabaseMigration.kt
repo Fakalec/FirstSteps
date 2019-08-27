@@ -3,7 +3,7 @@ package out.muravev.pv.databases
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-class Migration16to17 : Migration(16, 17) {
+class Migration17to18 : Migration(17, 18) {
     override fun migrate(database: SupportSQLiteDatabase) {
         val tempTableName = "TempStrings"
         val tableName = "Strings"

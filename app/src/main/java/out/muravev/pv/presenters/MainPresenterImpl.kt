@@ -4,13 +4,13 @@ import out.muravev.pv.contracts.MainContract
 import out.muravev.pv.data.TextItemModel
 import out.muravev.pv.utils.DeviceCheckerUtil
 
-class MainFragmentPresenterImpl(
+class MainPresenterImpl(
 
     private val model: TextItemModel,
     private val view: MainContract.MainFragment,
     private val checkDeviceUtil: DeviceCheckerUtil
 ) :
-    MainContract.MainFragmentPresenter, MainContract.HolderPresenter {
+    MainContract.MainPresenter {
 
     private var mainListener = object : MainContract.ScreenChangeListener {
         override fun onScreenChanged() {
@@ -34,8 +34,8 @@ class MainFragmentPresenterImpl(
         }
     }
 
-    override fun onDeleteButtonClicked(itemPosition: Int) {
-        model.deleteItemOnPosition(itemPosition)
+    override fun onDeleteButtonClicked(idKey: Int) {
+        model.deleteItemOnIdKey(idKey)
         view.updateList(model.getUnsortedList())
         model.resultScreenInitialize()
     }
