@@ -14,6 +14,7 @@ class TextItemModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: T
     private var savedString: String = ""
     private val dbWorkerThread = DbWorkerThread("DbThread")
     private val stringDao = sqlData.stringDao()
+    private var id = -1
 
     fun putResultListener(screenChangeCallback: MainContract.ScreenChangeListener) {
         resultScreenListener = screenChangeCallback
@@ -47,12 +48,8 @@ class TextItemModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: T
     }
 
     fun addNewItem() {
-        listStrings.add(TextDateItems(savedString, Date()))
-        val stringsEntity = TextItemEntity(
-            listStrings[listStrings.lastIndex].creationDate,
-            listStrings[listStrings.lastIndex].name
-//            listStrings.lastIndex
-        )
+        listStrings.add(TextDateItems(savedString, Date(), ++id))
+        val stringsEntity = TextItemEntity(Date(), savedString, id)
         val task = Runnable {
             stringDao.insertString(stringsEntity)
         }
@@ -60,11 +57,16 @@ class TextItemModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: T
     }
 
     fun deleteItemOnPosition(itemPosition: Int) {
-        listStrings.removeAt(itemPosition)
-        val task = Runnable {
-            stringDao.deleteOnPosition(itemPosition)
+        for (i in 0..listStrings.lastIndex) {
+            if (itemPosition == listStrings[i].id) {
+                val task = Runnable {
+                    stringDao.deleteOnPosition(listStrings[i].id)
+                    listStrings.removeAt(i)
+                }
+                dbWorkerThread.postTask(task)
+                break
+            }
         }
-        dbWorkerThread.postTask(task)
     }
 
     fun clearEnteredText() {
@@ -96,7 +98,7 @@ class TextItemModel(private val listMergeSortAlgo: ListMergeSortAlgo, sqlData: T
         val task = Runnable {
             val list = stringDao.getAllStrings()
             for (i in 0..list.lastIndex) {
-                listStrings.add(TextDateItems(list[i].name, list[i].date))
+                listStrings.add(TextDateItems(list[i].name, list[i].date, list[i].id))
             }
         }
         dbWorkerThread.postTask(task)

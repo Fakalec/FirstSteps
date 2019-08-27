@@ -1,5 +1,6 @@
 package out.muravev.pv.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -25,8 +26,9 @@ class StringsRecyclerAdapter(
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         holder.stringsView.text = dataList[position].name
         holder.dateView.text = dataList[position].dateFormat()
+        holder.idView.text = dataList[position].id.toString()
         holder.deleteButton.setOnClickListener {
-            presenter.onDeleteButtonClicked(position)
+            presenter.onDeleteButtonClicked(dataList[position].id)
         }
     }
 }

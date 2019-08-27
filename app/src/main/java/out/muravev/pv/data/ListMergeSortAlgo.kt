@@ -32,7 +32,8 @@ class ListMergeSortAlgo {
                 resultSortedList.add(
                     TextDateItems(
                         smallerValueList[leftHandIndex].name,
-                        smallerValueList[leftHandIndex].creationDate
+                        smallerValueList[leftHandIndex].creationDate,
+                        smallerValueList[leftHandIndex].id
                     )
                 )
                 leftHandIndex++
@@ -40,7 +41,8 @@ class ListMergeSortAlgo {
                 resultSortedList.add(
                     TextDateItems(
                         biggerValueList[rightHandIndex].name,
-                        biggerValueList[rightHandIndex].creationDate
+                        biggerValueList[rightHandIndex].creationDate,
+                        biggerValueList[rightHandIndex].id
                     )
                 )
                 rightHandIndex++
@@ -51,7 +53,8 @@ class ListMergeSortAlgo {
             resultSortedList.add(
                 TextDateItems(
                     smallerValueList[leftHandIndex].name,
-                    smallerValueList[leftHandIndex].creationDate
+                    smallerValueList[leftHandIndex].creationDate,
+                    smallerValueList[leftHandIndex].id
                 )
             )
             leftHandIndex++
@@ -61,7 +64,8 @@ class ListMergeSortAlgo {
             resultSortedList.add(
                 TextDateItems(
                     biggerValueList[rightHandIndex].name,
-                    biggerValueList[rightHandIndex].creationDate
+                    biggerValueList[rightHandIndex].creationDate,
+                    biggerValueList[rightHandIndex].id
                 )
             )
             rightHandIndex++

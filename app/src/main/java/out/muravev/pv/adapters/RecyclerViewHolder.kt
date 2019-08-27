@@ -11,4 +11,5 @@ class RecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val stringsView: TextView = view.strings_view
     val dateView: TextView = view.date_view
     val deleteButton: Button = view.delete_button
+    val idView: TextView = view.id_view
 }

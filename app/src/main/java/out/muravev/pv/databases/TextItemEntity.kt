@@ -5,12 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
-@Entity(tableName = "string_date")
-class TextItemEntity( // todo
+@Entity(tableName = "strings")
+class TextItemEntity(
     @ColumnInfo(name = "date")
     val date: Date,
     @ColumnInfo(name = "name")
     val name: String,
-
-    @PrimaryKey(autoGenerate = true) val id: Int = 0
+    @PrimaryKey val id: Int
 )

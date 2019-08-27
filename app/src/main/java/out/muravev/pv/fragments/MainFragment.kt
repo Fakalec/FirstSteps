@@ -18,7 +18,7 @@ import out.muravev.pv.presenters.MainFragmentPresenterImpl
 import out.muravev.pv.routers.FragmentRouterImpl
 import out.muravev.pv.utils.ToastUtils
 
-class MainFragment : Fragment(), MainContract.SorterView {
+class MainFragment : Fragment(), MainContract.MainFragment {
 
     private lateinit var mainPresenter: MainContract.MainFragmentPresenter
     private lateinit var router: MainContract.FragmentRouter

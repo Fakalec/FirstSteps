@@ -7,7 +7,7 @@ import out.muravev.pv.utils.DeviceCheckerUtil
 class MainFragmentPresenterImpl(
 
     private val model: TextItemModel,
-    private val view: MainContract.SorterView,
+    private val view: MainContract.MainFragment,
     private val checkDeviceUtil: DeviceCheckerUtil
 ) :
     MainContract.MainFragmentPresenter, MainContract.HolderPresenter {

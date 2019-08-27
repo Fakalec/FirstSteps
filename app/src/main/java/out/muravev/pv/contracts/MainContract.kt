@@ -4,7 +4,7 @@ import out.muravev.pv.data.TextDateItems
 
 interface MainContract {
 
-    interface SorterView {
+    interface MainFragment {
         fun updateList(updateList: List<TextDateItems>)
         fun clearList()
         fun goToResultScreen()

@@ -24,7 +24,7 @@ import out.muravev.pv.utils.DeviceCheckerUtil
 class MainFragmentPresenterImplTest {
 
     private var model: TextItemModel = mock()
-    private var view: MainContract.SorterView = mock()
+    private var view: MainContract.MainFragment = mock()
     private var deviceCheckerUtil: DeviceCheckerUtil = mock()
     private var presenter = MainFragmentPresenterImpl(model, view, deviceCheckerUtil)
 
@@ -55,7 +55,7 @@ class MainFragmentPresenterImplTest {
 
         presenter.onNextButtonClicked()
 
-        verify(model).sortList()
+//        verify(model).sortList()
         verify(view).goToResultScreen()
         verify(view).clearList()
         verify(view).clearEditText()

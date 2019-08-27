@@ -7,15 +7,15 @@ import androidx.room.Query
 @Dao
 interface TextItemDao {
 
-    @Query("SELECT * FROM string_date")
+    @Query("SELECT * FROM strings")
     fun getAllStrings(): List<TextItemEntity>
 
-    @Query("DELETE FROM string_date WHERE id == :position")
+    @Query("DELETE FROM strings WHERE id == :position")
     fun deleteOnPosition(position: Int)
 
     @Insert
     fun insertString(stringData: TextItemEntity)
 
-    @Query("DELETE FROM string_date")
+    @Query("DELETE FROM strings")
     fun deleteAllStrings()
 }
